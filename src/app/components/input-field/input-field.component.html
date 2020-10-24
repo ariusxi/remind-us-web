@@ -1,0 +1,62 @@
+<mat-form-field>
+    <mat-label *ngIf="isAttributeExists(labelText)">{{labelText}}</mat-label>
+    <!-- Input -->
+    <input
+        matInput
+        *ngIf="isInputType()"
+        [(ngModel)]="inputValue"
+        [type]="inputType"
+        [placeholder]="placeholderText"
+        [class]="className"
+        [id]="inputName"
+        [name]="inputName"
+        [disabled]="disabled"
+        [value]="inputValue"
+        (keyup)="onChangeInput()"
+    />
+    <!-- Textarea -->
+    <textarea
+        matInput
+        *ngIf="isTextArea()"
+        [(ngModel)]="inputValue"
+        [type]="inputType"
+        [placeholder]="placeholderText"
+        [class]="className"
+        [id]="inputName"
+        [name]="inputName"
+        [disabled]="disabled"
+        [value]="inputValue"
+        (keyup)="onChangeInput()">
+    </textarea>
+
+    <!-- Select -->
+    <mat-select
+        matInput
+        *ngIf="isSelect()"
+        [(ngModel)]="inputValue"
+        [type]="inputType"
+        [placeholder]="placeholderText"
+        [class]="className"
+        [id]="inputName"
+        [name]="inputName"
+        [disabled]="disabled"
+        [value]="inputValue"
+        (keyup)="onChangeInput()">
+        <mat-option
+            *ngFor="let currentOption of options"
+            value="currentOption.value">
+            {{currentOption.label}}
+        </mat-option>
+    </mat-select>
+
+    <mat-hint
+        *ngIf="isAttributeExists(hintText)"
+        [align]="hintPosition">
+        {{hintText}}
+    </mat-hint>
+    <mat-icon
+        matSuffix
+        *ngIf="isAttributeExists(iconType)">
+        {{iconType}}
+    </mat-icon>
+</mat-form-field>

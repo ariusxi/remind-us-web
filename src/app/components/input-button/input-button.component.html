@@ -1,0 +1,59 @@
+<!-- Button -->
+<button
+    mat-button
+    [color]="color"
+    [className]="className"
+    [disabled]="disabled"
+    *ngIf="buttonType === 'button'">
+    {{buttonText}}
+</button>
+
+<!-- Raised Button -->
+<button
+    mat-raised-button
+    [color]="color"
+    [className]="className"
+    [disabled]="disabled"
+    *ngIf="buttonType === 'raised-button'">
+    {{buttonText}}
+</button>
+
+<!-- Stroked Button -->
+<button
+    mat-stroked-button
+    [color]="color"
+    [className]="className"
+    [disabled]="disabled"
+    *ngIf="buttonType === 'stroked-button'">
+    {{buttonText}}
+</button>
+
+<!-- Flat Button -->
+<button
+    mat-flat-button
+    [color]="color"
+    [className]="className"
+    [disabled]="disabled"
+    *ngIf="buttonType === 'flat-button'">
+    {{buttonText}}
+</button>
+
+<!-- Fab Button -->
+<button
+    mat-fab
+    [color]="color"
+    [className]="className"
+    [disabled]="disabled"
+    *ngIf="buttonType === 'fab-button'">
+    <mat-icon>{{buttonIcon}}</mat-icon>
+</button>
+
+<!-- Icon Button -->
+<button
+    mat-icon-button
+    [color]="color"
+    [className]="className"
+    [disabled]="disabled"
+    *ngIf="buttonType === 'icon-button'">
+    <mat-icon>{{buttonIcon}}</mat-icon>
+</button>

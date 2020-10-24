@@ -1,0 +1,21 @@
+<card class="card-login-main text-center">
+    <input-field
+        [placeholderText]="'Oi'"
+        [inputName]="'Nome'"
+        [inputType]="'text'"
+        (onChangeValue)="onChangeValue($event)"
+    ></input-field>
+    <input-button
+        [buttonText]="'Enviar'"
+        [buttonType]="'fab'"
+        [buttonIcon]="'mode_edit'"
+        [color]="'primary'"
+        [disabled]="false"
+    ></input-button>
+    <paginator
+        [length]="100"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        (onChangeValue)="onChangeValue($event)"
+    ></paginator>
+</card>
