@@ -1,17 +1,26 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { User } from 'src/app/models/User';
+
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
     @Output() onPageChange: EventEmitter<Object> = new EventEmitter();
 
     public buttonType: string = 'button';
 
-    constructor() { }
+    constructor(
+        private userService: UserService,
+    ) { }
+
+    async ngOnInit() {
+
+    }
 
     onChangeValue(props: Object): void {
         console.log(props);
