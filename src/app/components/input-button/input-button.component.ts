@@ -8,7 +8,6 @@ import { Component, Input } from '@angular/core';
 export class InputButtonComponent {
 
     @Input() color: string = 'primary';
-    @Input() className: string = '';
     @Input() disabled: boolean;
 
     @Input() buttonIcon: string;

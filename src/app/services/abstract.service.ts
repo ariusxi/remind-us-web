@@ -5,6 +5,11 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
+export interface ResponseApi<T> {
+    success: boolean;
+    data: T;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -32,8 +37,8 @@ export class AbstractService<T> {
     }
 
     public handleError(errorData: HttpErrorResponse): Observable<never> {
-        let errorMessage = ''
-        if (errorData.error instanceof ErrorEvent) {
+        let errorMessage = '';
+        if (errorData.error) {
             errorMessage = errorData.error.message;
         } else {
             errorMessage = `Error code: ${errorData.status}, message: ${errorData.message}`;
@@ -61,7 +66,7 @@ export class AbstractService<T> {
             );
     }
 
-    public sendRequisition(endpoint: string, methodType: string = 'get', dataRequisition: Object = {}): Promise<T> {
+    public sendRequisition(endpoint: string, methodType: string = 'get', dataRequisition: Object = {}): Promise<ResponseApi<T>> {
         const currentMethodType: string = this.getCurrentMethodType(methodType);
         const getRequisitionMethod = (type: string) => ({
             'get': () => this.urlRequisition(endpoint, methodType),
@@ -78,7 +83,7 @@ export class AbstractService<T> {
         return new Promise((resolve, reject) => {
             methodResult.subscribe(
                 (data) => resolve(data),
-                (err) => reject(err)
+                (err) => reject(err),
             )
         })
     }

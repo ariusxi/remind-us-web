@@ -1,0 +1,121 @@
+<card
+    class="card-login-main text-center ml-auto mr-auto mt-5"
+    [className]="'p-5'">
+    <div class="row">
+        <div class="col-md-6 img-info text-center">
+            <image
+                [url]="imageLogin"
+                [className]="'pt-5 pb-5 image-card-login'"
+            ></image>
+            <div class="col-md-12 pt-3 text-center">
+                <text
+                    tag="h3"
+                    className="font-weight-normal"
+                    [textValue]="'Uma nova maneira de criar seus lembretes'">
+                </text>
+                <text
+                    className="font-weight-light"
+                    [textValue]="'Mussum Ipsum, cacilds vidis litro abertis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Sapien in monti palavris qui num significa nadis i pareci latim.'">
+                </text>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-tab-group mat-align-tabs="center">
+                <!-- Login -->
+                <mat-tab label="Login">
+                    <div class="row">
+                        <div class="col-md-12 pt-5">
+                            <input-field
+                                [placeholderText]="'Digite seu e-mail'"
+                                [inputName]="'emailLogin'"
+                                [errorField]="hasError('emailLogin')"
+                                [inputType]="'text'"
+                                [isRequired]="true"
+                                (onChangeValue)="onChangeValue($event, 'emailLogin')"
+                            ></input-field>
+                        </div>
+                        <div class="col-md-12">
+                            <input-field
+                                [placeholderText]="'Digite sua senha'"
+                                [inputName]="'passwordLogin'"
+                                [errorField]="hasError('passwordLogin')"
+                                [inputType]="'password'"
+                                [isRequired]="true"
+                                (onChangeValue)="onChangeValue($event, 'passwordLogin')"
+                            ></input-field>
+                        </div>
+                        <div
+                            class="col-md-12"
+                            *ngIf="errorMessage !== ''">
+                            <text
+                                [className]="'text-center text-danger'"
+                                [textValue]="errorMessage">
+                            </text>
+                        </div>
+                        <div class="col-md-12 p-5">
+                            <input-button
+                                [disabled]="false"
+                                [buttonType]="'raised-button'"
+                                [buttonText]="'Login'"
+                                (click)="login()">
+                            </input-button>
+                        </div>
+                    </div>
+                </mat-tab>
+                <!-- Register -->
+                <mat-tab label="Cadastro">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input-field
+                                [placeholderText]="'Digite seu nome'"
+                                [inputName]="'fullnameRegister'"
+                                [errorField]="hasError('fullnameRegister')"
+                                [inputType]="'text'"
+                                [isRequired]="true"
+                                (onChangeValue)="onChangeValue($event, 'fullnameRegister')">
+                            </input-field>
+                        </div>
+                        <div class="col-md-12">
+                            <input-field
+                                [placeholderText]="'Digite seu e-mail'"
+                                [inputName]="'emailRegister'"
+                                [errorField]="hasError('emailRegister')"
+                                [inputType]="'text'"
+                                [isRequired]="true"
+                                (onChangeValue)="onChangeValue($event, 'emailRegister')">
+                            </input-field>
+                        </div>
+                        <div class="col-md-6">
+                            <input-field
+                                [placeholderText]="'Digite sua senha'"
+                                [inputName]="'passwordRegister'"
+                                [errorField]="hasError('passwordRegister')"
+                                [inputType]="'text'"
+                                [isRequired]="true"
+                                (onChangeValue)="onChangeValue($event, 'passwordRegister')"
+                            ></input-field>
+                        </div>
+                        <div class="col-md-6">
+                            <input-field
+                                [placeholderText]="'Confirme sua senha'"
+                                [inputName]="'confirmPasswordRegister'"
+                                [errorField]="hasError('confirmPasswordRegister')"
+                                [inputType]="'text'"
+                                [isRequired]="true"
+                                (onChangeValue)="onChangeValue($event, 'confirmPasswordRegister')"
+                            ></input-field>
+                        </div>
+                        <div class="col-md-12 p-5">
+                            <input-button
+                                [disabled]="false"
+                                [buttonType]="'raised-button'"
+                                [buttonText]="'Cadastrar'"
+                                (click)="signin()">
+                            </input-button>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</card>

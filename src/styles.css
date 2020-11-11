@@ -2,7 +2,8 @@
 
     font-size: 60%;
 
-    --color-purple: #637ab7;
+    --color-purple: #673ab7;
+    --color-red: #f44336;
     --color-white: #ffffff;
     --color-grey: #cccccc;
 
@@ -10,3 +11,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.row .mat-tab-body-content {
+    overflow-x: hidden;
+}

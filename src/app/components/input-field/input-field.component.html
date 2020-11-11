@@ -6,6 +6,7 @@
         *ngIf="isInputType()"
         [(ngModel)]="inputValue"
         [type]="inputType"
+        [required]="isRequired"
         [placeholder]="placeholderText"
         [class]="className"
         [id]="inputName"
@@ -13,6 +14,7 @@
         [disabled]="disabled"
         [value]="inputValue"
         (keyup)="onChangeInput()"
+        ngDefaultControl
     />
     <!-- Textarea -->
     <textarea
@@ -20,13 +22,15 @@
         *ngIf="isTextArea()"
         [(ngModel)]="inputValue"
         [type]="inputType"
+        [required]="isRequired"
         [placeholder]="placeholderText"
         [class]="className"
         [id]="inputName"
         [name]="inputName"
         [disabled]="disabled"
         [value]="inputValue"
-        (keyup)="onChangeInput()">
+        (keyup)="onChangeInput()"
+        ngDefaultControl>
     </textarea>
 
     <!-- Select -->
@@ -35,13 +39,15 @@
         *ngIf="isSelect()"
         [(ngModel)]="inputValue"
         [type]="inputType"
+        [required]="isRequired"
         [placeholder]="placeholderText"
         [class]="className"
         [id]="inputName"
         [name]="inputName"
         [disabled]="disabled"
         [value]="inputValue"
-        (keyup)="onChangeInput()">
+        (keyup)="onChangeInput()"
+        ngDefaultControl>
         <mat-option
             *ngFor="let currentOption of options"
             value="currentOption.value">
@@ -49,11 +55,20 @@
         </mat-option>
     </mat-select>
 
+    <!-- Hint -->
     <mat-hint
         *ngIf="isAttributeExists(hintText)"
         [align]="hintPosition">
         {{hintText}}
     </mat-hint>
+
+    <!-- Error -->
+    <mat-error
+        [hidden]="!errorField">
+        <p>{{inputName}} é obrigatório</p>
+    </mat-error>
+
+    <!-- Icon -->
     <mat-icon
         matSuffix
         *ngIf="isAttributeExists(iconType)">

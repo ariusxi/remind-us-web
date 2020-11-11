@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'card',
@@ -6,6 +6,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
     styleUrls: ['./card.component.css']
 })
 export class CardComponent {
+
+    @Input() className: string;
 
     @ViewChild("parent") children: ElementRef<HTMLElement>;
 

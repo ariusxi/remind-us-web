@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ComponentUtils } from 'src/app/utils/classes/ComponentUtils';
+import { NonValidInput } from 'src/app/utils/classes/Validator';
 
 interface SelectOption {
     label: string;
@@ -18,8 +19,9 @@ export class InputFieldComponent extends ComponentUtils {
 
     @Input() labelText: string;
     @Input() placeholderText: string;
-    @Input() isRequired: boolean;
+    @Input() isRequired: boolean = false;
 
+    @Input() errorField: NonValidInput;
     @Input() hintText: string;
     @Input() hintPosition: string = 'start';
 
@@ -32,19 +34,19 @@ export class InputFieldComponent extends ComponentUtils {
     @Input() iconType: string;
     @Input() disabled: boolean;
 
-    onChangeInput(): void {
+    public onChangeInput(): void {
         this.onChangeValue.emit(this.inputValue);
     }
 
-    isInputType(): boolean {
+    public isInputType(): boolean {
         return ['text', 'number', 'email', 'telephone', 'password', 'date'].includes(this.inputType);
     }
 
-    isTextArea(): boolean {
+    public isTextArea(): boolean {
         return this.inputType === 'textarea';
     }
 
-    isSelect(): boolean {
+    public isSelect(): boolean {
         return this.inputType === 'select';
     }
 

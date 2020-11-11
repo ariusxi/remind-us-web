@@ -5,3 +5,9 @@
 mat-form-field {
     width: 100%;
 }
+
+.label-error {
+    color: var(--color-red);
+    float: left;
+    display: block;
+}
