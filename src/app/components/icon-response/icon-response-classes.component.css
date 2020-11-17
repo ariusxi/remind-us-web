@@ -1,0 +1,437 @@
+.swal2-popup .swal2-styled.swal2-confirm{
+    border:0;
+    border-radius:.25em;
+    background:initial;
+    background-color:#3085d6;
+    color:#fff;
+    font-size:1.0625em
+}
+.swal2-popup .swal2-styled.swal2-cancel{
+    border:0;
+    border-radius:.25em;
+    background:initial;
+    background-color:#aaa;
+    color:#fff;
+    font-size:1.0625em
+}
+.swal2-popup .swal2-styled:focus{
+    outline:0;
+    box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(50,100,150,.4)
+}
+.swal2-popup .swal2-styled::-moz-focus-inner{
+    border:0
+}
+.swal2-popup .swal2-footer{
+    justify-content:center;
+    margin:1.25em 0 0;
+    padding-top:1em;
+    border-top:1px solid #eee;
+    color:#545454;
+    font-size:1em
+}
+.swal2-popup .swal2-image{
+    max-width:100%;
+    margin:1.25em auto
+}
+.swal2-popup .swal2-close{
+    position:absolute;
+    top:0;
+    right:0;
+    justify-content:center;
+    width:1.2em;
+    height:1.2em;
+    padding:0;
+    transition:color .1s ease-out;
+    border:none;
+    border-radius:0;
+    background:0 0;
+    color:#ccc;
+    font-family:serif;
+    font-size:2.5em;
+    line-height:1.2;
+    cursor:pointer;
+    overflow:hidden
+}
+.swal2-popup .swal2-close:hover{
+    -webkit-transform:none;
+    transform:none;
+    color:#f27474
+}
+.swal2-popup>.swal2-checkbox,.swal2-popup>.swal2-file,.swal2-popup>.swal2-input,.swal2-popup>.swal2-radio,.swal2-popup>.swal2-select,.swal2-popup>.swal2-textarea{
+    display:none
+}
+.swal2-popup .swal2-content{
+    justify-content:center;
+    margin:0;
+    padding:0;
+    color:#545454;
+    font-size:1.125em;
+    font-weight:300;
+    line-height:normal;
+    word-wrap:break-word
+}
+.swal2-popup #swal2-content{
+    text-align:center
+}
+.swal2-popup .swal2-checkbox,.swal2-popup .swal2-file,.swal2-popup .swal2-input,.swal2-popup .swal2-radio,.swal2-popup .swal2-select,.swal2-popup .swal2-textarea{
+    margin:1em auto
+}
+.swal2-popup .swal2-file,.swal2-popup .swal2-input,.swal2-popup .swal2-textarea{
+    width:100%;
+    transition:border-color .3s,box-shadow .3s;
+    border:1px solid #d9d9d9;
+    border-radius:.1875em;
+    font-size:1.125em;
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.06);
+    box-sizing:border-box
+}
+.swal2-popup .swal2-file.swal2-inputerror,.swal2-popup .swal2-input.swal2-inputerror,.swal2-popup .swal2-textarea.swal2-inputerror{
+    border-color:#f27474!important;
+    box-shadow:0 0 2px #f27474!important
+}
+.swal2-popup .swal2-file:focus,.swal2-popup .swal2-input:focus,.swal2-popup .swal2-textarea:focus{
+    border:1px solid #b4dbed;
+    outline:0;
+    box-shadow:0 0 3px #c4e6f5
+}
+.swal2-popup .swal2-file::-webkit-input-placeholder,.swal2-popup .swal2-input::-webkit-input-placeholder,.swal2-popup .swal2-textarea::-webkit-input-placeholder{
+    color:#ccc
+}
+.swal2-popup .swal2-file:-ms-input-placeholder,.swal2-popup .swal2-input:-ms-input-placeholder,.swal2-popup .swal2-textarea:-ms-input-placeholder{
+    color:#ccc
+}
+.swal2-popup .swal2-file::-ms-input-placeholder,.swal2-popup .swal2-input::-ms-input-placeholder,.swal2-popup .swal2-textarea::-ms-input-placeholder{
+    color:#ccc
+}
+.swal2-popup .swal2-file::placeholder,.swal2-popup .swal2-input::placeholder,.swal2-popup .swal2-textarea::placeholder{
+    color:#ccc
+}
+.swal2-popup .swal2-range input{
+    width:80%
+}
+.swal2-popup .swal2-range output{
+    width:20%;
+    font-weight:600;
+    text-align:center
+}
+.swal2-popup .swal2-range input,.swal2-popup .swal2-range output{
+    height:2.625em;
+    margin:1em auto;
+    padding:0;
+    font-size:1.125em;
+    line-height:2.625em
+}
+.swal2-popup .swal2-input{
+    height:2.625em;
+    padding:.75em
+}
+.swal2-popup .swal2-input[type=number]{
+    max-width:10em
+}
+.swal2-popup .swal2-file{
+    font-size:1.125em
+}
+.swal2-popup .swal2-textarea{
+    height:6.75em;
+    padding:.75em
+}
+.swal2-popup .swal2-select{
+    min-width:50%;
+    max-width:100%;
+    padding:.375em .625em;
+    color:#545454;
+    font-size:1.125em
+}
+.swal2-popup .swal2-checkbox,.swal2-popup .swal2-radio{
+    align-items:center;
+    justify-content:center
+}
+.swal2-popup .swal2-checkbox label,.swal2-popup .swal2-radio label{
+    margin:0 .6em;
+    font-size:1.125em
+}
+.swal2-popup .swal2-checkbox input,.swal2-popup .swal2-radio input{
+    margin:0 .4em
+}
+.swal2-popup .swal2-validationerror{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:.625em;
+    background:#f0f0f0;
+    color:#666;
+    font-size:1em;
+    font-weight:300;
+    overflow:hidden
+}
+.swal2-popup .swal2-validationerror::before{
+    display:inline-block;
+    width:1.5em;
+    min-width:1.5em;
+    height:1.5em;
+    margin:0 .625em;
+    border-radius:50%;
+    background-color:#f27474;
+    color:#fff;
+    font-weight:600;
+    line-height:1.5em;
+    text-align:center;
+    content:'!';
+    zoom:normal
+}
+@supports (-ms-accelerator:true){
+    .swal2-range input{
+        width:100%!important
+    }
+    .swal2-range output{
+        display:none
+    }
+}
+@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){
+    .swal2-range input{
+        width:100%!important
+    }
+    .swal2-range output{
+        display:none
+    }
+}
+@-moz-document url-prefix(){
+    .swal2-close:focus{
+        outline:2px solid rgba(50,100,150,.4)
+    }
+}
+.swal2-icon{
+    position:relative;
+    justify-content:center;
+    width:5em;
+    height:5em;
+    margin:1.25em auto 1.875em;
+    border:.25em solid transparent;
+    border-radius:50%;
+    line-height:5em;
+    cursor:default;
+    box-sizing:content-box;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    zoom:normal
+}
+.swal2-icon-text{
+    font-size:3.75em
+}
+.swal2-icon.swal2-error{
+    border-color:#f27474
+}
+.swal2-icon.swal2-error .swal2-x-mark{
+    position:relative;
+    flex-grow:1
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line]{
+    display:block;
+    position:absolute;
+    top:2.3125em;
+    width:2.9375em;
+    height:.3125em;
+    border-radius:.125em;
+    background-color:#f27474
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{
+    left:1.0625em;
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg)
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{
+    right:1em;
+    -webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg)
+}
+.swal2-icon.swal2-warning{
+    border-color:#facea8;
+    color:#f8bb86
+}
+.swal2-icon.swal2-info{
+    border-color:#9de0f6;
+    color:#3fc3ee
+}
+.swal2-icon.swal2-question{
+    border-color:#c9dae1;
+    color:#87adbd
+}
+.swal2-icon.swal2-success{
+    border-color:#a5dc86
+}
+.swal2-icon.swal2-success [class^=swal2-success-circular-line]{
+    position:absolute;
+    width:3.75em;
+    height:7.5em;
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+    border-radius:50%
+}
+.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{
+    top:-.4375em;
+    left:-2.0635em;
+    -webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg);
+    -webkit-transform-origin:3.75em 3.75em;
+    transform-origin:3.75em 3.75em;
+    border-radius:7.5em 0 0 7.5em
+}
+.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{
+    top:-.6875em;
+    left:1.875em;
+    -webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg);
+    -webkit-transform-origin:0 3.75em;
+    transform-origin:0 3.75em;
+    border-radius:0 7.5em 7.5em 0
+}
+.swal2-icon.swal2-success .swal2-success-ring{
+    position:absolute;
+    top:-.25em;
+    left:-.25em;
+    width:100%;
+    height:100%;
+    border:.25em solid rgba(165,220,134,.3);
+    border-radius:50%;
+    z-index:2;
+    box-sizing:content-box
+}
+.swal2-icon.swal2-success .swal2-success-fix{
+    position:absolute;
+    top:.5em;
+    left:1.625em;
+    width:.4375em;
+    height:5.625em;
+    -webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg);
+    z-index:1
+}
+.swal2-icon.swal2-success [class^=swal2-success-line]{
+    display:block;
+    position:absolute;
+    height:.3125em;
+    border-radius:.125em;
+    background-color:#a5dc86;
+    z-index:2
+}
+.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{
+    top:2.875em;
+    left:.875em;
+    width:1.5625em;
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg)
+}
+.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{
+    top:2.375em;
+    right:.5em;
+    width:2.9375em;
+    -webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg)
+}
+.swal2-progresssteps{
+    align-items:center;
+    margin:0 0 1.25em;
+    padding:0;
+    font-weight:600
+}
+.swal2-progresssteps li{
+    display:inline-block;
+    position:relative
+}
+.swal2-progresssteps .swal2-progresscircle{
+    width:2em;
+    height:2em;
+    border-radius:2em;
+    background:#3085d6;
+    color:#fff;
+    line-height:2em;
+    text-align:center;
+    z-index:20
+}
+.swal2-progresssteps .swal2-progresscircle:first-child{
+    margin-left:0
+}
+.swal2-progresssteps .swal2-progresscircle:last-child{
+    margin-right:0
+}
+.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep{
+    background:#3085d6
+}
+.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep~.swal2-progresscircle{
+    background:#add8e6
+}
+.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep~.swal2-progressline{
+    background:#add8e6
+}
+.swal2-progresssteps .swal2-progressline{
+    width:2.5em;
+    height:.4em;
+    margin:0 -1px;
+    background:#3085d6;
+    z-index:10
+}
+[class^=swal2]{
+    -webkit-tap-highlight-color:transparent
+}
+.swal2-show{
+    -webkit-animation:swal2-show .3s;
+    animation:swal2-show .3s
+}
+.swal2-show.swal2-noanimation{
+    -webkit-animation:none;
+    animation:none
+}
+.swal2-hide{
+    -webkit-animation:swal2-hide .15s forwards;
+    animation:swal2-hide .15s forwards
+}
+.swal2-hide.swal2-noanimation{
+    -webkit-animation:none;
+    animation:none
+}
+[dir=rtl] .swal2-close{
+    right:auto;
+    left:0
+}
+.swal2-animate-success-icon .swal2-success-line-tip{
+    -webkit-animation:swal2-animate-success-line-tip .75s;
+    animation:swal2-animate-success-line-tip .75s
+}
+.swal2-animate-success-icon .swal2-success-line-long{
+    -webkit-animation:swal2-animate-success-line-long .75s;
+    animation:swal2-animate-success-line-long .75s
+}
+.swal2-animate-success-icon .swal2-success-circular-line-right{
+    -webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;
+    animation:swal2-rotate-success-circular-line 4.25s ease-in
+}
+.swal2-animate-error-icon{
+    -webkit-animation:swal2-animate-error-icon .5s;
+    animation:swal2-animate-error-icon .5s
+}
+.swal2-animate-error-icon .swal2-x-mark{
+    -webkit-animation:swal2-animate-error-x-mark .5s;
+    animation:swal2-animate-error-x-mark .5s
+}
+@-webkit-keyframes swal2-rotate-loading{
+    0%{
+        -webkit-transform:rotate(0);
+        transform:rotate(0)
+    }
+    100%{
+        -webkit-transform:rotate(360deg);
+        transform:rotate(360deg)
+    }
+}
+@keyframes swal2-rotate-loading{
+    0%{
+        -webkit-transform:rotate(0);
+        transform:rotate(0)
+    }
+    100%{
+        -webkit-transform:rotate(360deg);
+        transform:rotate(360deg)
+    }
+}
