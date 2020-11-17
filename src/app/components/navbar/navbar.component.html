@@ -1,0 +1,12 @@
+<mat-toolbar
+    [color]="color">
+    <button
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+        *ngIf="hasToggleButton">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{navbarText}}</span>
+    <ng-content></ng-content>
+</mat-toolbar>

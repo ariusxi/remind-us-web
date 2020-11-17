@@ -2,43 +2,52 @@
 <button
     mat-button
     [color]="color"
-    [disabled]="disabled"
+    [class.spinner]="loading"
+    [disabled]="disabled || loading"
     *ngIf="buttonType === 'button'">
-    {{buttonText}}
+    <span *ngIf="loading">&nbsp;</span>
+    <span *ngIf="!loading">{{buttonText}}</span>
 </button>
 
 <!-- Raised Button -->
 <button
     mat-raised-button
     [color]="color"
-    [disabled]="disabled"
+    [class.spinner]="loading"
+    [disabled]="disabled || loading"
     *ngIf="buttonType === 'raised-button'">
-    {{buttonText}}
+    <span *ngIf="loading">&nbsp;</span>
+    <span *ngIf="!loading">{{buttonText}}</span>
 </button>
 
 <!-- Stroked Button -->
 <button
     mat-stroked-button
     [color]="color"
-    [disabled]="disabled"
+    [class.spinner]="loading"
+    [disabled]="disabled || loading"
     *ngIf="buttonType === 'stroked-button'">
-    {{buttonText}}
+    <span *ngIf="loading">&nbsp;</span>
+    <span *ngIf="!loading">{{buttonText}}</span>
 </button>
 
 <!-- Flat Button -->
 <button
     mat-flat-button
     [color]="color"
-    [disabled]="disabled"
+    [class.spinner]="loading"
+    [disabled]="disabled || loading"
     *ngIf="buttonType === 'flat-button'">
-    {{buttonText}}
+    <span *ngIf="loading">&nbsp;</span>
+    <span *ngIf="!loading">{{buttonText}}</span>
 </button>
 
 <!-- Fab Button -->
 <button
     mat-fab
     [color]="color"
-    [disabled]="disabled"
+    [class.spinner]="loading"
+    [disabled]="disabled || loading"
     *ngIf="buttonType === 'fab-button'">
     <mat-icon>{{buttonIcon}}</mat-icon>
 </button>
@@ -47,7 +56,8 @@
 <button
     mat-icon-button
     [color]="color"
-    [disabled]="disabled"
+    [class.spinner]="loading"
+    [disabled]="disabled || loading"
     *ngIf="buttonType === 'icon-button'">
     <mat-icon>{{buttonIcon}}</mat-icon>
 </button>

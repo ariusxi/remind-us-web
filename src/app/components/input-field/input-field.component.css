@@ -6,6 +6,10 @@ mat-form-field {
     width: 100%;
 }
 
+textarea {
+    height: 100px;
+}
+
 .label-error {
     color: var(--color-red);
     float: left;

@@ -6,12 +6,45 @@
     --color-red: #f44336;
     --color-white: #ffffff;
     --color-grey: #cccccc;
+    --color-black: #000000;
 
 }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+@keyframes spinner {
+    to { transform: rotate(360deg); }
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border:2px solid var(--color-white);
+    border-top-color: var(--color-purple);
+    animation: spinner .8s linear infinite;
+}
+
 .row .mat-tab-body-content {
     overflow-x: hidden;
+}
+
+a.fc-col-header-cell-cushion {
+    color: var(--color-purple);
+}
+
+.mat-toolbar mat-icon{
+    color: var(--color-white);
+}
+
+.image-category {
+    width: 40%;
 }

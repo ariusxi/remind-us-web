@@ -1,1 +1,31 @@
+<navbar
+    [color]="'primary'"
+    [navbarText]="'Remind Us'">
+    <span class="navbar-spacer"></span>
+    <input-button
+        [buttonType]="'icon-button'"
+        [buttonIcon]="'account_circle'"
+        (click)="showProfile()">
+    </input-button>
+    <input-button
+        [buttonType]="'icon-button'"
+        [buttonIcon]="'logout'"
+        (click)="logout()">
+    </input-button>
+</navbar>
+<mat-tab-group
+    mat-align-tabs="center">
+    <!-- Login -->
+    <mat-tab label="Lembretes">
+    </mat-tab>
 
+    <!-- Schedule -->
+    <mat-tab label="Agenda">
+        <calendar></calendar>
+    </mat-tab>
+
+    <!-- Categories -->
+    <mat-tab label="Categorias">
+        <categories></categories>
+    </mat-tab>
+</mat-tab-group>

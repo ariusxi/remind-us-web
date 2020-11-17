@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-md-10">
+        <text
+            tag="h2"
+            mat-dialog-title
+            [textValue]="'Atualizar dados de perfil'">
+        </text>
+    </div>
+    <div class="col-md-2">
+        <input-button
+            mat-dialog-close
+            id="close-button"
+            [buttonType]="'icon-button'"
+            [buttonIcon]="'close'">
+        </input-button>
+    </div>
+</div>
+<mat-dialog-content class="mat-typography p-5">
+    <div class="row">
+        <div class="col-md-12">
+            <text [textValue]="'Dados de perfil'"></text>
+        </div>
+        <div class="col-md-6">
+            <input-field
+                [placeholderText]="'Nome completo'"
+                [inputName]="'fullnameUser'"
+                [inputValue]="fullnameUser"
+                [errorField]="hasError('fullnameUser')"
+                [inputType]="'text'"
+                [isRequired]="true"
+                (onChangeValue)="onChangeValue($event, 'fullnameUser')">
+            </input-field>
+        </div>
+        <div class="col-md-6">
+            <input-field
+                [placeholderText]="'E-mail'"
+                [inputName]="'emailUser'"
+                [inputValue]="emailUser"
+                [errorField]="hasError('emailUser')"
+                [inputType]="'text'"
+                [disabled]="true"
+                [isRequired]="true"
+                (onChangeValue)="onChangeValue($event, 'emailUser')">
+            </input-field>
+        </div>
+        <div class="offset-md-10 col-md-2 pb-3 text-right">
+            <input-button
+                [buttonType]="'raised-button'"
+                [buttonText]="'Alterar'"
+                [loading]="responseLoadingProfile"
+                (click)="updateProfile()">
+            </input-button>
+        </div>
+    </div>
+    <divider></divider>
+    <div class="row">
+        <div class="col-md-12 pt-5">
+            <text [textValue]="'Senha'"></text>
+        </div>
+        <div class="col-md-6">
+            <input-field
+                [placeholderText]="'Digite sua senha'"
+                [inputName]="'passwordUser'"
+                [errorField]="hasError('passwordUser')"
+                [inputType]="'password'"
+                [isRequired]="true"
+                (onChangeValue)="onChangeValue($event, 'passwordUser')"
+            ></input-field>
+        </div>
+        <div class="col-md-6">
+            <input-field
+                [placeholderText]="'Confirme sua senha'"
+                [inputName]="'confirmPasswordUser'"
+                [errorField]="hasError('confirmPasswordUser')"
+                [inputType]="'password'"
+                [isRequired]="true"
+                (onChangeValue)="onChangeValue($event, 'confirmPasswordUser')"
+            ></input-field>
+        </div>
+        <div class="offset-md-10 col-md-2 pb-3 text-right">
+            <input-button
+                [buttonType]="'raised-button'"
+                [buttonText]="'Alterar'"
+                [loading]="responseLoadingPassword"
+                (click)="updatePassword()">
+            </input-button>
+        </div>
+        <div
+            class="col-md-12"
+            *ngIf="errorMessage !== ''">
+            <text
+                [className]="'text-center text-danger'"
+                [textValue]="errorMessage">
+            </text>
+        </div>
+    </div>
+</mat-dialog-content>

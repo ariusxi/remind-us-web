@@ -32,4 +32,24 @@ export class UserService extends AbstractService<User> {
         return await this.sendRequisition('auth/signin', 'post', user);
     }
 
+    /**
+     * @param {User} user
+     * @description Método que efetua a atualização de perfil do usuário
+     * @returns {Promise<ResponseApi<User>>}
+     * @memberof UserService
+     */
+    async updateProfile(user: User): Promise<ResponseApi<User>> {
+        return await this.sendRequisition('auth/update-profile', 'post', user, true);
+    }
+
+    /**
+     * @param {User} user
+     * @description Método que efetua a atualização da senha do usuário
+     * @returns {Promise<ResponseApi<User>>}
+     * @memberof UserService
+     */
+    async updatePassword(user: User): Promise<ResponseApi<User>> {
+        return await this.sendRequisition('auth/update-password', 'post', user, true);
+    }
+
 }

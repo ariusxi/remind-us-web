@@ -1,0 +1,9 @@
+<mat-checkbox
+    [(ngModel)]="inputValue"
+    [(indeterminate)]="indeterminate"
+    [labelPosition]="labelPosition"
+    [disabled]="disabled"
+    (change)="onChangeInput($event)"
+    (indeterminateChange)="onIndeterminateChange($event)">
+    {{checkboxText}}
+</mat-checkbox>

@@ -3,6 +3,7 @@
 export interface InputField {
     inputName: string;
     inputValue: string;
+    originalName: string;
     compare?: string;
     min?: number;
     max?: number;
@@ -11,7 +12,9 @@ export interface InputField {
 
 export interface FieldProperty {
     required?: boolean;
+    requiredTrue?: boolean;
     compare?: boolean;
+    email?: boolean;
     minLength?: LengthProperty;
     maxLength?: LengthProperty;
 }
@@ -23,6 +26,7 @@ export interface LengthProperty {
 
 export interface NonValidInput {
     fieldName: string;
+    originalName: string;
     fieldProperty: FieldProperty;
 }
 
@@ -65,7 +69,7 @@ export class Validator {
     }
 
     requiredTrue({inputValue}): object {
-        return inputValue === true ? null : { required: true };
+        return inputValue === true ? null : { requiredTrue: true };
     }
 
     email({inputValue}): object {
@@ -113,6 +117,7 @@ export class Validator {
                 if (fieldProperty && fieldErrorIndex === -1) {
                     validate.nonValidFields.push({
                         fieldName: currentField.inputName,
+                        originalName: currentField.originalName,
                         fieldProperty,
                     });
                 }

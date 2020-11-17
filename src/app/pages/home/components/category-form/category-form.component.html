@@ -1,0 +1,92 @@
+<div
+    class="row"
+    *ngIf="!isResponseEnabled">
+    <div class="col-md-10 col-xs-10">
+        <h1 mat-dialog-title
+            *ngIf="isNewCategory">
+            Criar categoria
+        </h1>
+        <h1 mat-dialog-title
+            *ngIf="!isNewCategory">
+            Editar categoria
+        </h1>
+    </div>
+    <div class="col-md-2 col-xs-2 text-right">
+        <input-button
+            mat-dialog-close
+            id="close-button"
+            [buttonType]="'icon-button'"
+            [buttonIcon]="'close'">
+        </input-button>
+    </div>
+</div>
+<div mat-dialog-content>
+    <div
+        class="row"
+        *ngIf="isResponseEnabled">
+        <div
+            class="col-md-12 text-center">
+            <icon-response
+                [iconType]="currentIconType">
+            </icon-response>
+            <text
+                tag="p"
+                *ngIf="currentIconType === 'success'"
+                [className]="'font-weight-bolder pb-2'"
+                [textValue]="'Categoria cadastrada com sucesso'">
+            </text>
+            <text
+                tag="p"
+                *ngIf="currentIconType === 'failure'"
+                [className]="'font-weight-bolder pb-2'"
+                [textValue]="'Ocorreu um erro ao cadastrar a categoria'">
+            </text>
+            <input-button
+                [buttonType]="'raised-button'"
+                [buttonText]="'Ok'"
+                (click)="toggleResponse()">
+            </input-button>
+        </div>
+    </div>
+    <div
+        class="row"
+        *ngIf="!isResponseEnabled">
+        <div class="col-md-12">
+            <input-field
+                [placeholderText]="'Nome da categoria'"
+                [inputName]="'titleCategory'"
+                [inputValue]="titleCategory"
+                [errorField]="hasError('titleCategory')"
+                [inputType]="'text'"
+                [isRequired]="true"
+                (onChangeValue)="onChangeValue($event, 'titleCategory')">
+            </input-field>
+        </div>
+        <div class="col-md-12">
+            <input-field
+                [placeholderText]="'Informe uma descrição da sua categoria...'"
+                [inputName]="'descriptionCategory'"
+                [inputValue]="descriptionCategory"
+                [errorField]="hasError('descriptionCategory')"
+                [inputType]="'textarea'"
+                (onChangeValue)="onChangeValue($event, 'descriptionCategory')">
+            </input-field>
+        </div>
+        <div
+            class="col-md-12"
+            *ngIf="errorMessage !== ''">
+            <text
+                [className]="'text-center text-danger'"
+                [textValue]="errorMessage">
+            </text>
+        </div>
+        <div class="col-md-12 pb-3 text-center">
+            <input-button
+                [buttonType]="'raised-button'"
+                [buttonText]="buttonText"
+                [loading]="responseLoadingCategory"
+                (click)="submit()">
+            </input-button>
+        </div>
+    </div>
+</div>

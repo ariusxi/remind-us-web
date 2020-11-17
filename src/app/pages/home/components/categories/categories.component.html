@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row pt-5">
+        <div
+            class="col-md-12"
+            *ngIf="isLoading">
+            <ngx-skeleton-loader count="10" appearance="square">
+            </ngx-skeleton-loader>
+        </div>
+        <div
+            class="col-md-12 text-center"
+            *ngIf="!isLoading && categoriesList.docs.length === 0">
+            <image
+                [url]="iconCategory"
+                [className]="'image-category'">
+            </image>
+            <text
+                tag="h3"
+                [textValue]="'Ops para que você não tenhuma categoria cadastrada :/'">
+            </text>
+            <input-button
+                (click)="showCategoryForm()"
+                [buttonType]="'raised-button'"
+                [buttonText]="'Cadastrar categoria'">
+            </input-button>
+        </div>
+    </div>
+</div>
+
+<input-button
+    id="add-category-bottom"
+    (click)="showCategoryForm()"
+    [color]="'primary'"
+    [buttonType]="'icon-button'"
+    [buttonIcon]="'add'"
+    *ngIf="!isLoading && categoriesList.docs.length > 0">
+</input-button>

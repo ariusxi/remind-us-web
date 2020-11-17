@@ -55,6 +55,7 @@
                         <div class="col-md-12 p-5">
                             <input-button
                                 [disabled]="false"
+                                [loading]="responseLoading"
                                 [buttonType]="'raised-button'"
                                 [buttonText]="'Login'"
                                 (click)="login()">
@@ -90,7 +91,7 @@
                                 [placeholderText]="'Digite sua senha'"
                                 [inputName]="'passwordRegister'"
                                 [errorField]="hasError('passwordRegister')"
-                                [inputType]="'text'"
+                                [inputType]="'password'"
                                 [isRequired]="true"
                                 (onChangeValue)="onChangeValue($event, 'passwordRegister')"
                             ></input-field>
@@ -100,14 +101,29 @@
                                 [placeholderText]="'Confirme sua senha'"
                                 [inputName]="'confirmPasswordRegister'"
                                 [errorField]="hasError('confirmPasswordRegister')"
-                                [inputType]="'text'"
+                                [inputType]="'password'"
                                 [isRequired]="true"
                                 (onChangeValue)="onChangeValue($event, 'confirmPasswordRegister')"
                             ></input-field>
                         </div>
+                        <div class="col-md-12">
+                            <checkbox
+                                [checkboxText]="'Eu concordo com os termos de serviço'"
+                                (onChangeValue)="onChangeValue($event, 'agreeTermsRegister')">
+                            </checkbox>
+                        </div>
+                        <div
+                            class="col-md-12"
+                            *ngIf="errorMessage !== ''">
+                            <text
+                                [className]="'text-center text-danger'"
+                                [textValue]="errorMessage">
+                            </text>
+                        </div>
                         <div class="col-md-12 p-5">
                             <input-button
                                 [disabled]="false"
+                                [loading]="responseLoading"
                                 [buttonType]="'raised-button'"
                                 [buttonText]="'Cadastrar'"
                                 (click)="signin()">

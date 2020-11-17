@@ -1,0 +1,13 @@
+:host {
+    width: 100%;
+    height: calc(100vh - 48px - 74px);
+
+    display: block;
+    position: relative;
+}
+
+#add-category-bottom {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}

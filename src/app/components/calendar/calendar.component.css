@@ -1,0 +1,6 @@
+:host {
+    padding-top: 10px;
+    height: calc(100vh - 48px -  74px);
+    position: relative;
+    display: block;
+}

@@ -4,7 +4,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { NonValidInput, Validator } from 'src/app/utils/classes/Validator';
 import Storage from 'src/app/utils/classes/Storage';
-import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'login',
@@ -17,6 +16,8 @@ export class LoginComponent implements OnInit {
 
     public errorMessage: string = '';
 
+    public responseLoading: boolean = false;
+
     // Login
     public emailLogin: string = '';
     public passwordLogin: string = '';
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     public fullnameRegister: string = '';
     public passwordRegister: string = '';
     public confirmPasswordRegister: string = '';
+    public agreeTermsRegister: string = '';
 
     public errorsMessage: NonValidInput[] = [];
 
@@ -43,22 +45,53 @@ export class LoginComponent implements OnInit {
 
     private resetValues(): void {
         Object.assign(this, {
-            errorMessage: '',
             passwordLogin: '',
             passwordRegister: '',
             confirmPasswordRegister: '',
+            responseLoading: false,
         })
+    }
+
+    private getErrorMessage(errorMessagesArray: NonValidInput[]): string {
+        let errorMessage = ''
+
+        // Percorrendo array de erros de campos
+        errorMessagesArray.forEach((currentErrorMessage) => {
+            if (currentErrorMessage.fieldProperty.required) {
+                errorMessage = 'Você deve preencher os campos obrigatórios.';
+            }
+            if (currentErrorMessage.fieldProperty.email) {
+                errorMessage = 'E-mail inválido.';
+            }
+            if (currentErrorMessage.fieldProperty.compare) {
+                errorMessage = `${currentErrorMessage.originalName} não está com o valor igual.`;
+            }
+            if (currentErrorMessage.fieldProperty.minLength) {
+                errorMessage = `${currentErrorMessage.originalName} não tem os caracteres mínimos.`;
+            }
+            if (currentErrorMessage.fieldProperty.maxLength) {
+                errorMessage = `${currentErrorMessage.originalName} ultrapassou o máximo de caracteres.`;
+            }
+            if (currentErrorMessage.fieldProperty.requiredTrue) {
+                errorMessage = `Você deve aceitar os termos de uso`;
+            }
+        })
+
+        return errorMessage
     }
 
     public login(): void {
         const validator = new Validator([
-            { inputName: 'emailLogin', inputValue: this.emailLogin, functions: ['required', 'email'] },
-            { inputName: 'passwordLogin', inputValue: this.passwordLogin, functions: ['required'] },
+            { inputName: 'emailLogin', inputValue: this.emailLogin, originalName: 'E-mail', functions: ['required', 'email'] },
+            { inputName: 'passwordLogin', inputValue: this.passwordLogin, originalName: 'Senha', functions: ['required'] },
         ]);
         const resultValidator = validator.validate();
 
+        this.errorMessage = '';
+        this.responseLoading = true;
+
         if (!resultValidator.isValid) {
-            this.errorsMessage = resultValidator.nonValidFields;
+            this.errorMessage = this.getErrorMessage(resultValidator.nonValidFields);
             this.resetValues();
             return;
         }
@@ -73,23 +106,27 @@ export class LoginComponent implements OnInit {
                 // Enviando o usuário para a rota de dashboard
                 this.route.navigate(['/home']);
             }
-        }).catch((error) => {
-            this.errorMessage = error;
-        })
-
+        }).catch((error) => Object.assign(this, {
+            errorMessage: error,
+            responseLoading: false,
+        }))
     }
 
     public signin(): void {
         const validator = new Validator([
-            { inputName: 'emailRegister', inputValue: this.emailRegister, functions: ['required', 'email'] },
-            { inputName: 'fullnameRegister', inputValue: this.fullnameRegister, functions: ['required'] },
-            { inputName: 'passwordRegister', inputValue: this.passwordRegister, functions: ['required'] },
-            { inputName: 'confirmPasswordRegister', inputValue: this.confirmPasswordRegister, functions: ['required', 'compare'], compare: this.passwordRegister },
+            { inputName: 'emailRegister', inputValue: this.emailRegister, originalName: 'E-mail', functions: ['required', 'email'] },
+            { inputName: 'fullnameRegister', inputValue: this.fullnameRegister, originalName: 'Nome completo', functions: ['required'] },
+            { inputName: 'passwordRegister', inputValue: this.passwordRegister, originalName: 'Senha', functions: ['required'] },
+            { inputName: 'confirmPasswordRegister', inputValue: this.confirmPasswordRegister, originalName: 'Confirmar Senha', functions: ['required', 'compare'], compare: this.passwordRegister },
+            { inputName: 'agreeTermsRegister', inputValue: this.agreeTermsRegister, originalName: 'Termos de uso', functions: ['requiredTrue'] },
         ]);
         const resultValidator = validator.validate();
 
+        this.errorMessage = '';
+        this.responseLoading = true;
+
         if (!resultValidator.isValid) {
-            this.errorsMessage = resultValidator.nonValidFields;
+            this.errorMessage = this.getErrorMessage(resultValidator.nonValidFields);
             this.resetValues();
             return;
         }
@@ -108,9 +145,10 @@ export class LoginComponent implements OnInit {
                 // Enviando o usuário para a rota de dashboard
                 this.route.navigate(['/home']);
             }
-        }).catch((error) => {
-            this.errorMessage = error;
-        })
+        }).catch((error) => Object.assign(this, {
+            errorMessage: error,
+            responseLoading: false,
+        }))
     }
 
     hasError(fieldName: string): NonValidInput {

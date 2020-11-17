@@ -9,6 +9,7 @@ export class InputButtonComponent {
 
     @Input() color: string = 'primary';
     @Input() disabled: boolean;
+    @Input() loading: boolean;
 
     @Input() buttonIcon: string;
     @Input() buttonText: string;
