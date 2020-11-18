@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,15 +25,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 
-// Fullcalendar
-import { FullCalendarModule } from '@fullcalendar/angular';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interationPlugin from '@fullcalendar/interaction';
-import googleCalendarPlugin from '@fullcalendar/google-calendar';
-
 // Skeleton
 import { NgxSkeletonLoaderModule } from '@exalif/ngx-skeleton-loader';
+
+// Calendar
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 // Components
 import { CalendarComponent } from './components/calendar/calendar.component';
@@ -42,6 +40,7 @@ import { CategoryFormComponent } from './pages/home/components/category-form/cat
 import { CategoryRemoveComponent } from './pages/home/components/category-remove/category-remove.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DividerComponent } from './components/divider/divider.component';
+import { DotComponent } from './components/dot/dot.component';
 import { IconComponent } from './components/icon/icon.component';
 import { IconResponseComponent } from './components/icon-response/icon-response.component';
 import { ImageComponent } from './components/image/image.component';
@@ -55,13 +54,6 @@ import { ScheduleComponent } from './pages/home/components/schedule/schedule.com
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabBodyComponent } from './components/tab-body/tab-body.component';
 import { TextComponent } from './components/text/text.component';
-
-FullCalendarModule.registerPlugins([
-    dayGridPlugin,
-    timeGridPlugin,
-    interationPlugin,
-    googleCalendarPlugin,
-]);
 
 @NgModule({
   declarations: [
@@ -77,6 +69,7 @@ FullCalendarModule.registerPlugins([
     CategoryRemoveComponent,
     CheckboxComponent,
     DividerComponent,
+    DotComponent,
     IconComponent,
     IconResponseComponent,
     ImageComponent,
@@ -98,8 +91,11 @@ FullCalendarModule.registerPlugins([
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    // Fullcalendar
-    FullCalendarModule,
+    // Calendar
+    CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory,
+    }),
     // Skeletor
     NgxSkeletonLoaderModule,
     // Material Theme
@@ -114,6 +110,7 @@ FullCalendarModule.registerPlugins([
     MatSelectModule,
     MatTabsModule,
     MatToolbarModule,
+    MatTooltipModule,
   ],
   providers: [
       { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

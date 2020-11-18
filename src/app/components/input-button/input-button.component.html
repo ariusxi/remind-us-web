@@ -1,6 +1,7 @@
 <!-- Button -->
 <button
     mat-button
+    [matTooltip]="tooltipText"
     [color]="color"
     [class.spinner]="loading"
     [disabled]="disabled || loading"
@@ -13,6 +14,7 @@
 <button
     mat-raised-button
     [color]="color"
+    [matTooltip]="tooltipText"
     [class.spinner]="loading"
     [disabled]="disabled || loading"
     *ngIf="buttonType === 'raised-button'">
@@ -24,6 +26,7 @@
 <button
     mat-stroked-button
     [color]="color"
+    [matTooltip]="tooltipText"
     [class.spinner]="loading"
     [disabled]="disabled || loading"
     *ngIf="buttonType === 'stroked-button'">
@@ -35,6 +38,7 @@
 <button
     mat-flat-button
     [color]="color"
+    [matTooltip]="tooltipText"
     [class.spinner]="loading"
     [disabled]="disabled || loading"
     *ngIf="buttonType === 'flat-button'">
@@ -46,6 +50,7 @@
 <button
     mat-fab
     [color]="color"
+    [matTooltip]="tooltipText"
     [class.spinner]="loading"
     [disabled]="disabled || loading"
     *ngIf="buttonType === 'fab-button'">
@@ -56,6 +61,7 @@
 <button
     mat-icon-button
     [color]="color"
+    [matTooltip]="tooltipText"
     [class.spinner]="loading"
     [disabled]="disabled || loading"
     *ngIf="buttonType === 'icon-button'">

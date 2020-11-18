@@ -51,7 +51,7 @@
     <div
         class="row"
         *ngIf="!isResponseEnabled">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <input-field
                 [placeholderText]="'Nome da categoria'"
                 [inputName]="'titleCategory'"
@@ -60,6 +60,16 @@
                 [inputType]="'text'"
                 [isRequired]="true"
                 (onChangeValue)="onChangeValue($event, 'titleCategory')">
+            </input-field>
+        </div>
+        <div class="col-md-4">
+            <input-field
+                [placeholderText]="'Cor da categoria'"
+                [inputName]="'colorCategory'"
+                [inputValue]="colorCategory"
+                [errorField]="hasError('colorCategory')"
+                [inputType]="'color'"
+                (onChangeValue)="onChangeValue($event, 'colorCategory')">
             </input-field>
         </div>
         <div class="col-md-12">

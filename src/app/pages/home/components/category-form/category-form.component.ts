@@ -23,6 +23,7 @@ export class CategoryFormComponent {
     // Category
     public idCategory: string;
     public titleCategory: string;
+    public colorCategory: string;
     public descriptionCategory: string;
 
     public isNewCategory: boolean = false;
@@ -37,6 +38,7 @@ export class CategoryFormComponent {
             isNewCategory: data.isNew,
             idCategory: data.idCategory,
             titleCategory: data.titleCategory,
+            colorCategory: data.colorCategory,
             descriptionCategory: data.descriptionCategory,
             refreshCategories: data.refreshCategories,
         });
@@ -45,6 +47,7 @@ export class CategoryFormComponent {
     public resetValues(): void {
         Object.assign(this, {
             titleCategory: '',
+            colorCategory: '#000000',
             descriptionCategory: '',
             responseLoadingCategory: false,
             isResponseEnabled: false,
@@ -95,6 +98,7 @@ export class CategoryFormComponent {
         context.categoryService.create({
             data: {
                 title: context.titleCategory,
+                color: context.colorCategory,
                 description: context.descriptionCategory,
             },
         }).then((response) => {
@@ -134,6 +138,7 @@ export class CategoryFormComponent {
         context.categoryService.update(context.idCategory, {
             data: {
                 title: context.titleCategory,
+                color: context.colorCategory,
                 description: context.descriptionCategory,
             },
         }).then((response) => {
@@ -175,6 +180,7 @@ export class CategoryFormComponent {
     }
 
     public onChangeValue(value: string, dataType: string): void{
+        console.log(dataType, value);
         this[dataType] = value;
     }
 

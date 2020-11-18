@@ -8,6 +8,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 export class CardComponent {
 
     @Input() className: string;
+    @Input() borderBottomColor: string = '#ffffff';
 
     @ViewChild("parent") children: ElementRef<HTMLElement>;
 

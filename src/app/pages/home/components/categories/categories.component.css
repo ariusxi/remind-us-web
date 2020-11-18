@@ -11,3 +11,9 @@
     bottom: 10px;
     right: 10px;
 }
+
+#color-category {
+    margin-right: 10px;
+    margin-top: 3px;
+    float: left;
+}

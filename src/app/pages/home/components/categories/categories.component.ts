@@ -60,6 +60,7 @@ export class CategoriesComponent implements OnInit{
                 isNew: false,
                 idCategory: category._id,
                 titleCategory: category.title,
+                colorCategory: category.color,
                 descriptionCategory: category.description,
             },
         });

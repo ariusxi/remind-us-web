@@ -16,6 +16,24 @@
         (keyup)="onChangeInput()"
         ngDefaultControl
     />
+
+    <!-- Color -->
+    <input
+        matInput
+        *ngIf="inputType === 'color'"
+        [(ngModel)]="inputValue"
+        [type]="inputType"
+        [required]="isRequired"
+        [placeholder]="placeholderText"
+        [class]="className"
+        [id]="inputName"
+        [name]="inputName"
+        [disabled]="disabled"
+        [value]="inputValue"
+        (change)="onChangeInput()"
+        ngDefaultControl
+    />
+
     <!-- Textarea -->
     <textarea
         matInput

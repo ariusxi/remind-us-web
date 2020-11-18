@@ -26,7 +26,8 @@
         <div
             class="col-md-4 pt-2"
             *ngFor="let currentCategory of categoriesList.docs">
-            <card>
+            <card
+                [borderBottomColor]="currentCategory.color">
                 <mat-card-content>
                     <text
                         tag="h3"
@@ -40,11 +41,13 @@
                 </mat-card-content>
                 <mat-card-actions>
                     <input-button
+                        [tooltipText]="'Editar'"
                         [buttonType]="'icon-button'"
                         [buttonIcon]="'create'"
                         (click)="editCategory(currentCategory)">
                     </input-button>
                     <input-button
+                        [tooltipText]="'Excluir'"
                         [buttonType]="'icon-button'"
                         [buttonIcon]="'delete'"
                         (click)="removeCategory(currentCategory)">
@@ -59,7 +62,7 @@
     id="add-category-bottom"
     (click)="showCategoryForm()"
     [color]="'primary'"
-    [buttonType]="'icon-button'"
+    [buttonType]="'fab-button'"
     [buttonIcon]="'add'"
     *ngIf="!isLoading && categoriesList.docs.length > 0">
 </input-button>

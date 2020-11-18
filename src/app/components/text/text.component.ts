@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'text',
@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./text.component.css'],
 })
 export class TextComponent {
+
+    @ViewChild("parent") children: ElementRef<HTMLElement>;
 
     @Input() className: string;
     @Input() tag: string = 'p';
