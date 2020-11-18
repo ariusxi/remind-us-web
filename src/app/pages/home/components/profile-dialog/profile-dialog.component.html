@@ -1,20 +1,21 @@
 <div
     class="row"
     *ngIf="!isResponseEnabled">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <text
-            tag="h2"
+            tag="h3"
             mat-dialog-title
             [textValue]="'Atualizar dados de perfil'">
         </text>
-    </div>
-    <div class="col-md-2">
-        <input-button
-            mat-dialog-close
-            id="close-button"
-            [buttonType]="'icon-button'"
-            [buttonIcon]="'close'">
-        </input-button>
+        <span
+            class="float-right">
+            <input-button
+                mat-dialog-close
+                id="close-button"
+                [buttonType]="'icon-button'"
+                [buttonIcon]="'close'">
+            </input-button>
+        </span>
     </div>
 </div>
 <mat-dialog-content class="mat-typography p-5">

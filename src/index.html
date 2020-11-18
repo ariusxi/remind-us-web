@@ -11,5 +11,15 @@
     </head>
     <body class="mat-typography">
         <app-root></app-root>
+
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+        <script>
+            window.OneSignal = window.OneSignal || [];
+            OneSignal.push(function() {
+                OneSignal.init({
+                appId: "2b132a6e-cd25-460b-9fd7-5b9a130fe359",
+                });
+            });
+        </script>
     </body>
 </html>

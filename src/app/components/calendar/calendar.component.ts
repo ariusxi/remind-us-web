@@ -30,6 +30,7 @@ export class CalendarComponent {
                 initialView: this.initialView,
                 dayMaxEvents: this.dayMaxEvents,
                 events: this.eventDays,
+                handleWindowResize: true,
                 weekends: true,
                 editable: true,
                 selectable: true,
