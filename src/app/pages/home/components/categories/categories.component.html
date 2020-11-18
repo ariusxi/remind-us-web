@@ -23,6 +23,35 @@
                 [buttonText]="'Cadastrar categoria'">
             </input-button>
         </div>
+        <div
+            class="col-md-4"
+            *ngFor="let currentCategory of categoriesList.docs">
+            <card>
+                <mat-card-content>
+                    <text
+                        tag="h3"
+                        [textValue]="currentCategory.title">
+                    </text>
+                    <text
+                        tag="p"
+                        [textValue]="currentCategory.description"
+                        *ngIf="currentCategory.description !== ''">
+                    </text>
+                </mat-card-content>
+                <mat-card-actions>
+                    <input-button
+                        [buttonType]="'icon-button'"
+                        [buttonIcon]="'create'"
+                        (click)="editCategory(currentCategory)">
+                    </input-button>
+                    <input-button
+                        [buttonType]="'icon-button'"
+                        [buttonIcon]="'delete'"
+                        (click)="removeCategory(currentCategory)">
+                    </input-button>
+                </mat-card-actions>
+            </card>
+        </div>
     </div>
 </div>
 

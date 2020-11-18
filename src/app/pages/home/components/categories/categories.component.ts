@@ -6,6 +6,7 @@ import { Paginate } from 'src/app/services/abstract.service';
 import { CategoryService } from 'src/app/services/category.service';
 
 import { CategoryFormComponent } from '../category-form/category-form.component';
+import { CategoryRemoveComponent } from '../category-remove/category-remove.component';
 
 @Component({
     selector: 'categories',
@@ -26,6 +27,10 @@ export class CategoriesComponent implements OnInit{
 
 
     async ngOnInit(): Promise<void> {
+        await this.loadCategories();
+    }
+
+    public async loadCategories(): Promise<void> {
         this.categoryService.getAll()
             .then((response) => {
                 if (response.success) {
@@ -34,15 +39,47 @@ export class CategoriesComponent implements OnInit{
                 this.isLoading = false;
             })
             .catch((err) => console.error(err))
-
     }
 
     public showCategoryForm(): void {
-        this.dialog.open(CategoryFormComponent, {
+        const createDialog = this.dialog.open(CategoryFormComponent, {
             data: {
                 isNew: true,
+                refreshCategories: this.loadCategories,
             },
         });
+
+        createDialog.afterClosed().subscribe(async () => {
+            await this.loadCategories();
+        });
+    }
+
+    public editCategory(category: Category): void {
+        const editDialog = this.dialog.open(CategoryFormComponent, {
+            data: {
+                isNew: false,
+                idCategory: category._id,
+                titleCategory: category.title,
+                descriptionCategory: category.description,
+            },
+        });
+
+        editDialog.afterClosed().subscribe(async () => {
+            await this.loadCategories();
+        })
+    }
+
+    public removeCategory(category: Category): void {
+        const removeDialog = this.dialog.open(CategoryRemoveComponent, {
+            data: {
+                idCategory: category._id,
+                titleCategory: category.title,
+            },
+        });
+
+        removeDialog.afterClosed().subscribe(async () => {
+            await this.loadCategories();
+        })
     }
 
 }

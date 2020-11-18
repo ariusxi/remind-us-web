@@ -98,10 +98,10 @@ export class LoginComponent implements OnInit {
 
         this.userService.login(this.emailLogin, this.passwordLogin).then((response) => {
             if (response.success) {
-                const { token } = response.data;
+                const { token, user } = response.data;
                 // Definindo sessão de usuário
                 Storage.set('token', token);
-                Storage.set('user', response.data);
+                Storage.set('user', user);
 
                 // Enviando o usuário para a rota de dashboard
                 this.route.navigate(['/home']);
@@ -137,10 +137,10 @@ export class LoginComponent implements OnInit {
             name: this.fullnameRegister,
         }).then((response) => {
             if (response.success) {
-                const { token } = response.data;
+                const { token, user } = response.data;
                 // Definindo sessão de usuário
                 Storage.set('token', token);
-                Storage.set('user', response.data);
+                Storage.set('user', user);
 
                 // Enviando o usuário para a rota de dashboard
                 this.route.navigate(['/home']);

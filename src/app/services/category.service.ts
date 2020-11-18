@@ -35,7 +35,7 @@ export class CategoryService extends AbstractService<Category> {
      * @memberof CategoryService
      */
     async get(id: string): Promise<ResponseApi<Category>> {
-        return await this.sendRequisition(`category/get/${id}`, 'get');
+        return await this.sendRequisition(`category/get/${id}`, 'get', true);
     }
 
     /**
@@ -45,7 +45,7 @@ export class CategoryService extends AbstractService<Category> {
      * @memberof CategoryService
      */
     async getAll(): Promise<ResponseApi<Paginate<Category>>> {
-        return await this.sendRequisition(`reminder/get-all`, 'get', {}, true);
+        return await this.sendRequisition(`category/get-all`, 'get', {}, true);
     }
 
     /**
@@ -55,7 +55,7 @@ export class CategoryService extends AbstractService<Category> {
      * @memberof CategoryService
      */
     async delete(id: string): Promise<ResponseApi<Category>> {
-        return await this.sendRequisition(`category/remove/${id}`, 'delete');
+        return await this.sendRequisition(`category/remove/${id}`, 'delete', {}, true);
     }
 
 }

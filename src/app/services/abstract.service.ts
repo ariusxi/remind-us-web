@@ -38,7 +38,7 @@ export class AbstractService<T> {
     ) {}
 
     private getCurrentMethodType(methodType: string): string {
-        return methodType === 'get' ? 'get' : 'default';
+        return ['get', 'delete'].includes(methodType) ? 'get' : 'default';
     }
 
     private getCurrentHttpOptions(isAuth: boolean) {

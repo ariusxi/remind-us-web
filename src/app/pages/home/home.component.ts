@@ -14,14 +14,12 @@ import { ProfileDialogComponent } from './components/profile-dialog/profile-dial
 })
 export class HomeComponent {
 
-    public userProfile: User = Storage.get('user').user;
+    public userProfile: User = Storage.get('user');
 
     constructor(
         private route: Router,
         private dialog: MatDialog,
-    ) {
-        console.log(this.userProfile);
-    }
+    ) {}
 
     public getFirstName(): string {
         return this.userProfile.name.split(" ")[0];

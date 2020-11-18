@@ -39,6 +39,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardComponent } from './components/card/card.component';
 import { CategoriesComponent } from './pages/home/components/categories/categories.component';
 import { CategoryFormComponent } from './pages/home/components/category-form/category-form.component';
+import { CategoryRemoveComponent } from './pages/home/components/category-remove/category-remove.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { IconComponent } from './components/icon/icon.component';
@@ -73,6 +74,7 @@ FullCalendarModule.registerPlugins([
     CardComponent,
     CategoriesComponent,
     CategoryFormComponent,
+    CategoryRemoveComponent,
     CheckboxComponent,
     DividerComponent,
     IconComponent,

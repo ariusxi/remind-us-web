@@ -1,0 +1,52 @@
+<text
+    tag="h4"
+    mat-dialog-title
+    *ngIf="!isResponseEnabled"
+    [textValue]="'Tem certeza que deseja apagar a categoria ' + titleCategory + '?'">
+</text>
+<div mat-dialog-content>
+    <div
+        class="row"
+        *ngIf="isResponseEnabled">
+        <div
+            class="col-md-12 text-center">
+            <icon-response
+                [iconType]="currentIconType">
+            </icon-response>
+            <text
+                tag="p"
+                *ngIf="currentIconType === 'success'"
+                [className]="'font-weight-bolder pb-2'"
+                [textValue]="'Categoria removida com sucesso'">
+            </text>
+            <text
+                tag="p"
+                *ngIf="currentIconType === 'failure'"
+                [className]="'font-weight-bolder pb-2'"
+                [textValue]="'Ocorreu um erro ao remover a categoria'">
+            </text>
+            <input-button
+                mat-dialog-close
+                [buttonType]="'raised-button'"
+                [buttonText]="'Ok'">
+            </input-button>
+        </div>
+    </div>
+    <div
+        class="row"
+        *ngIf="!isResponseEnabled">
+        <div class="col-md-12">
+            <input-button
+                [buttonType]="'raised-button'"
+                [buttonText]="'Remover'"
+                [loading]="responseLoadingCategory"
+                (click)="removeCategory()">
+            </input-button>
+            <input-button
+                mat-dialog-close
+                [buttonType]="'button'"
+                [buttonText]="'Cancelar'">
+            </input-button>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { User } from 'src/app/models/User';
 import { NonValidInput, Validator } from 'src/app/utils/classes/Validator';
 import { CategoryService } from 'src/app/services/category.service';
-
-import Storage from 'src/app/utils/classes/Storage';
 
 @Component({
     selector: 'category-form',
@@ -41,10 +38,11 @@ export class CategoryFormComponent {
             idCategory: data.idCategory,
             titleCategory: data.titleCategory,
             descriptionCategory: data.descriptionCategory,
+            refreshCategories: data.refreshCategories,
         });
     }
 
-    private resetValues(): void {
+    public resetValues(): void {
         Object.assign(this, {
             titleCategory: '',
             descriptionCategory: '',
@@ -80,7 +78,6 @@ export class CategoryFormComponent {
     }
 
     private async registerCategory(context: any): Promise<void> {
-        console.log(this);
         const validator = new Validator([
             { inputName: 'titleCategory', inputValue: context.titleCategory, originalName: 'Nome da categoria', functions: ['required'] },
         ]);
@@ -119,8 +116,43 @@ export class CategoryFormComponent {
         }))
     }
 
-    private async updateCategory(): Promise<void> {
-        console.log('Atualizar');
+    private async updateCategory(context: any): Promise<void> {
+        const validator = new Validator([
+            { inputName: 'titleCategory', inputValue: context.titleCategory, originalName: 'Nome da categoria', functions: ['required'] },
+        ]);
+        const resultValidator = validator.validate();
+
+        context.errorMessage = '';
+        context.responseLoadingCategory = true;
+
+        if (!resultValidator.isValid) {
+            context.errorMessage = context.getErrorMessage(resultValidator.nonValidFields);
+            context.resetValues();
+            return;
+        }
+
+        context.categoryService.update(context.idCategory, {
+            data: {
+                title: context.titleCategory,
+                description: context.descriptionCategory,
+            },
+        }).then((response) => {
+            if (response.success) {
+                // Removendo loader do botão de cadastrar
+                context.responseLoadingCategory = false;
+
+                // Definindo a resposta da requisição
+                context.currentIconType = 'success';
+
+                // Alternando a aba de resposta
+                context.toggleResponse();
+            }
+        }).catch((error) => Object.assign(context, {
+            errorMessage: error,
+            responseLoadingCategory: false,
+            isResponseEnabled: true,
+            currentIconType: 'failure',
+        }))
     }
 
     public async submit(): Promise<void> {
@@ -128,6 +160,8 @@ export class CategoryFormComponent {
             'true': this.registerCategory,
             'false': this.updateCategory,
         })[methodType];
+
+        console.log(this)
 
         await responseMethod(this.isNewCategory.toString())(this);
     }
@@ -142,6 +176,10 @@ export class CategoryFormComponent {
 
     public onChangeValue(value: string, dataType: string): void{
         this[dataType] = value;
+    }
+
+    public closeDialog(): void {
+        this.dialogRef.close();
     }
 
 }

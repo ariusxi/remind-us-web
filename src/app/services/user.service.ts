@@ -3,6 +3,11 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/User';
 import { AbstractService, ResponseApi } from './abstract.service';
 
+export interface AuthResponse {
+    token: string;
+    user: User;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -15,7 +20,7 @@ export class UserService extends AbstractService<User> {
      * @returns {Promise<ResponseApi<User>>}
      * @memberof UserService
      */
-    async login(email: string, password: string): Promise<ResponseApi<User>> {
+    async login(email: string, password: string): Promise<ResponseApi<AuthResponse>> {
         return await this.sendRequisition('auth/login', 'post', {
             email,
             password,
@@ -28,7 +33,7 @@ export class UserService extends AbstractService<User> {
      * @returns {Promise<ResponseApi<User>>}
      * @memberof UserService
      */
-    async signin(user: User): Promise<ResponseApi<User>> {
+    async signin(user: User): Promise<ResponseApi<AuthResponse>> {
         return await this.sendRequisition('auth/signin', 'post', user);
     }
 
@@ -39,7 +44,7 @@ export class UserService extends AbstractService<User> {
      * @memberof UserService
      */
     async updateProfile(user: User): Promise<ResponseApi<User>> {
-        return await this.sendRequisition('auth/update-profile', 'post', user, true);
+        return await this.sendRequisition('auth/update-profile', 'put', user, true);
     }
 
     /**
@@ -49,7 +54,7 @@ export class UserService extends AbstractService<User> {
      * @memberof UserService
      */
     async updatePassword(user: User): Promise<ResponseApi<User>> {
-        return await this.sendRequisition('auth/update-password', 'post', user, true);
+        return await this.sendRequisition('auth/update-password', 'put', user, true);
     }
 
 }

@@ -12,7 +12,7 @@ import Storage from 'src/app/utils/classes/Storage';
 })
 export class ProfileDialogComponent {
 
-    public userProfile: User = Storage.get('user').user;
+    public userProfile: User = Storage.get('user');
 
     public errorMessage: string = '';
     public errorsMessage: NonValidInput[] = [];
@@ -21,6 +21,9 @@ export class ProfileDialogComponent {
     public emailUser: string = '';
     public fullnameUser: string = '';
     public responseLoadingProfile: boolean = false;
+
+    public currentIconType: string = 'success';
+    public isResponseEnabled: boolean = false;
 
     // Password
     public passwordUser: string = '';
@@ -42,6 +45,8 @@ export class ProfileDialogComponent {
             fullnameUser: this.userProfile.name,
             passwordUser: '',
             confirmPasswordUser: '',
+            currentIconType: 'success',
+            isResponseEnabled: false,
             responseLoadingProfile: false,
             responseLoadingPassword: false,
         })
@@ -96,11 +101,20 @@ export class ProfileDialogComponent {
                 // Defindo os dados de usuário na sessão
                 Storage.set('user', response.data);
 
-                this.responseLoadingPassword = false;
+                // Definindo a resposta do botão de alteração
+                this.currentIconType = 'success';
+
+                // Alternando a aba de resposta
+                this.toggleResponse();
+
+                // Desativando o loader do botão
+                this.responseLoadingProfile = false;
             }
         }).catch((error) => Object.assign(this, {
             errorMessage: error,
             responseLoadingProfile: false,
+            isResponseEnabled: true,
+            currentIconType: 'failure',
         }))
     }
 
@@ -127,12 +141,25 @@ export class ProfileDialogComponent {
                 // Defindo os dados de usuário na sessão
                 Storage.set('user', response.data);
 
+                // Definindo a resposta do botão de alteração
+                this.currentIconType = 'success';
+
+                // Alternando a aba de resposta
+                this.toggleResponse();
+
+                // Desativando o loader do botão
                 this.responseLoadingPassword = false;
             }
         }).catch((error) => Object.assign(this, {
             errorMessage: error,
             responseLoadingPassword: false,
+            isResponseEnabled: true,
+            currentIconType: 'failure',
         }))
+    }
+
+    public toggleResponse(): void {
+        this.isResponseEnabled = !this.isResponseEnabled;
     }
 
     public hasError(fieldName: string): NonValidInput {

@@ -33,18 +33,18 @@
                 tag="p"
                 *ngIf="currentIconType === 'success'"
                 [className]="'font-weight-bolder pb-2'"
-                [textValue]="'Categoria cadastrada com sucesso'">
+                [textValue]="isNewCategory ? 'Categoria cadastrada com sucesso' : 'Categoria atualizada com sucesso'">
             </text>
             <text
                 tag="p"
                 *ngIf="currentIconType === 'failure'"
                 [className]="'font-weight-bolder pb-2'"
-                [textValue]="'Ocorreu um erro ao cadastrar a categoria'">
+                [textValue]="isNewCategory ? 'Ocorreu um erro ao cadastrar a categoria' : 'Ocorreu um erro ao atualizar a categoria'">
             </text>
             <input-button
                 [buttonType]="'raised-button'"
                 [buttonText]="'Ok'"
-                (click)="toggleResponse()">
+                (click)="closeDialog()">
             </input-button>
         </div>
     </div>
