@@ -1,24 +1,18 @@
 <div
-    class="row"
     *ngIf="!isResponseEnabled">
-    <div class="col-md-12">
-        <text
-            tag="h3"
-            mat-dialog-title
-            [textValue]="'Atualizar dados de perfil'">
-        </text>
-        <span
-            class="float-right">
-            <input-button
-                mat-dialog-close
-                id="close-button"
-                [buttonType]="'icon-button'"
-                [buttonIcon]="'close'">
-            </input-button>
-        </span>
-    </div>
+    <input-button
+        mat-dialog-close
+        id="close-button"
+        [buttonType]="'icon-button'"
+        [buttonIcon]="'close'">
+    </input-button>
+    <text
+        tag="h3"
+        mat-dialog-title
+        [textValue]="'Atualizar dados de perfil'">
+    </text>
 </div>
-<mat-dialog-content class="mat-typography p-5">
+<mat-dialog-content class="mat-typography">
     <div
         class="row"
         *ngIf="isResponseEnabled">
@@ -46,86 +40,116 @@
             </input-button>
         </div>
     </div>
-    <div
-        class="row"
+    <mat-tab-group
+        mat-align-tabs="left"
         *ngIf="!isResponseEnabled">
-        <div class="col-md-12">
-            <text [textValue]="'Dados de perfil'"></text>
-        </div>
-        <div class="col-md-6">
-            <input-field
-                [placeholderText]="'Nome completo'"
-                [inputName]="'fullnameUser'"
-                [inputValue]="fullnameUser"
-                [errorField]="hasError('fullnameUser')"
-                [inputType]="'text'"
-                [isRequired]="true"
-                (onChangeValue)="onChangeValue($event, 'fullnameUser')">
-            </input-field>
-        </div>
-        <div class="col-md-6">
-            <input-field
-                [placeholderText]="'E-mail'"
-                [inputName]="'emailUser'"
-                [inputValue]="emailUser"
-                [errorField]="hasError('emailUser')"
-                [inputType]="'text'"
-                [disabled]="true"
-                [isRequired]="true"
-                (onChangeValue)="onChangeValue($event, 'emailUser')">
-            </input-field>
-        </div>
-        <div class="offset-md-10 col-md-2 pb-3 text-right">
-            <input-button
-                [buttonType]="'raised-button'"
-                [buttonText]="'Alterar'"
-                [loading]="responseLoadingProfile"
-                (click)="updateProfile()">
-            </input-button>
-        </div>
-    </div>
-    <divider *ngIf="!isResponseEnabled"></divider>
-    <div
-        class="row"
-        *ngIf="!isResponseEnabled">
-        <div class="col-md-12 pt-5">
-            <text [textValue]="'Senha'"></text>
-        </div>
-        <div class="col-md-6">
-            <input-field
-                [placeholderText]="'Digite sua senha'"
-                [inputName]="'passwordUser'"
-                [errorField]="hasError('passwordUser')"
-                [inputType]="'password'"
-                [isRequired]="true"
-                (onChangeValue)="onChangeValue($event, 'passwordUser')"
-            ></input-field>
-        </div>
-        <div class="col-md-6">
-            <input-field
-                [placeholderText]="'Confirme sua senha'"
-                [inputName]="'confirmPasswordUser'"
-                [errorField]="hasError('confirmPasswordUser')"
-                [inputType]="'password'"
-                [isRequired]="true"
-                (onChangeValue)="onChangeValue($event, 'confirmPasswordUser')"
-            ></input-field>
-        </div>
-        <div class="offset-md-10 col-md-2 pb-3 text-right">
-            <input-button
-                [buttonType]="'raised-button'"
-                [buttonText]="'Alterar'"
-                [loading]="responseLoadingPassword"
-                (click)="updatePassword()">
-            </input-button>
-        </div>
-        <div
-            class="col-md-12"
-            *ngIf="errorMessage !== ''">
-            <text
-                [className]="'text-center text-danger'"
-                [textValue]="errorMessage">
-            </text>
-        </div>
-    </div>
+        <mat-tab label="Dados de Perfil">
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <input-field
+                        [placeholderText]="'Nome completo'"
+                        [inputName]="'fullnameUser'"
+                        [inputValue]="fullnameUser"
+                        [errorField]="hasError('fullnameUser')"
+                        [inputType]="'text'"
+                        [isRequired]="true"
+                        (onChangeValue)="onChangeValue($event, 'fullnameUser')">
+                    </input-field>
+                </div>
+                <div class="col-md-6">
+                    <input-field
+                        [placeholderText]="'E-mail'"
+                        [inputName]="'emailUser'"
+                        [inputValue]="emailUser"
+                        [errorField]="hasError('emailUser')"
+                        [inputType]="'text'"
+                        [disabled]="true"
+                        [isRequired]="true"
+                        (onChangeValue)="onChangeValue($event, 'emailUser')">
+                    </input-field>
+                </div>
+                <div class="offset-md-10 col-md-2 pb-3 text-right">
+                    <input-button
+                        [buttonType]="'raised-button'"
+                        [buttonText]="'Alterar'"
+                        [loading]="responseLoadingProfile"
+                        (click)="updateProfile()">
+                    </input-button>
+                </div>
+            </div>
+            <divider *ngIf="!isResponseEnabled"></divider>
+            <div
+                class="row"
+                *ngIf="!isResponseEnabled">
+                <div class="col-md-12 pt-5">
+                    <text [textValue]="'Senha'"></text>
+                </div>
+                <div class="col-md-6">
+                    <input-field
+                        [placeholderText]="'Digite sua senha'"
+                        [inputName]="'passwordUser'"
+                        [errorField]="hasError('passwordUser')"
+                        [inputType]="'password'"
+                        [isRequired]="true"
+                        (onChangeValue)="onChangeValue($event, 'passwordUser')"
+                    ></input-field>
+                </div>
+                <div class="col-md-6">
+                    <input-field
+                        [placeholderText]="'Confirme sua senha'"
+                        [inputName]="'confirmPasswordUser'"
+                        [errorField]="hasError('confirmPasswordUser')"
+                        [inputType]="'password'"
+                        [isRequired]="true"
+                        (onChangeValue)="onChangeValue($event, 'confirmPasswordUser')"
+                    ></input-field>
+                </div>
+                <div class="offset-md-10 col-md-2 pb-3 text-right">
+                    <input-button
+                        [buttonType]="'raised-button'"
+                        [buttonText]="'Alterar'"
+                        [loading]="responseLoadingPassword"
+                        (click)="updatePassword()">
+                    </input-button>
+                </div>
+                <div
+                    class="col-md-12"
+                    *ngIf="errorMessage !== ''">
+                    <text
+                        [className]="'text-center text-danger'"
+                        [textValue]="errorMessage">
+                    </text>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Imagem de Usuário">
+            <div class="row">
+                <div
+                    class="col-md-3 text-center"
+                    *ngFor="let currentProfileOption of profilePicOptions">
+                    <image
+                        [className]="getClassProfilePic(currentProfileOption)"
+                        (click)="changeProfilePicture(currentProfileOption)"
+                        [url]="profilePicPath + currentProfileOption + '.png'">
+                    </image>
+                </div>
+                <div class="col-md-12 pt-3 text-center">
+                    <input-button
+                        [buttonType]="'raised-button'"
+                        [buttonText]="'Alterar'"
+                        [loading]="responseLoadingProfilePhoto"
+                        (click)="updateProfilePicture()">
+                    </input-button>
+                </div>
+                <div
+                    class="col-md-12"
+                    *ngIf="errorMessage !== ''">
+                    <text
+                        [className]="'text-center text-danger'"
+                        [textValue]="errorMessage">
+                    </text>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 </mat-dialog-content>

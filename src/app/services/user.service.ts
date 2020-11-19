@@ -49,6 +49,16 @@ export class UserService extends AbstractService<User> {
 
     /**
      * @param {User} user
+     * @description Método que efetua a atualização da foto de perfil de usuário
+     * @returns {Promise<ResponseApi<User>>}
+     * @memberof UserService
+     */
+    async updateProfilePhoto(user: User): Promise<ResponseApi<User>> {
+        return await this.sendRequisition('auth/update-profile-photo', 'put', user, true);
+    }
+
+    /**
+     * @param {User} user
      * @description Método que efetua a atualização da senha do usuário
      * @returns {Promise<ResponseApi<User>>}
      * @memberof UserService

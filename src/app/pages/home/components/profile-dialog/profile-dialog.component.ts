@@ -14,6 +14,19 @@ export class ProfileDialogComponent {
 
     public userProfile: User = Storage.get('user');
 
+    public profilePicOptions: string[] = [
+        'bear',
+        'dog',
+        'gorilla',
+        'lemur',
+        'pig',
+        'ram',
+        'sheep',
+        'wild-boar'
+    ];
+    public profilePicUser: string = Storage.get('user').photo;
+    public profilePicPath: string = '/assets/images/user-icons/';
+
     public errorMessage: string = '';
     public errorsMessage: NonValidInput[] = [];
 
@@ -21,6 +34,7 @@ export class ProfileDialogComponent {
     public emailUser: string = '';
     public fullnameUser: string = '';
     public responseLoadingProfile: boolean = false;
+    public responseLoadingProfilePhoto: boolean = false;
 
     public currentIconType: string = 'success';
     public isResponseEnabled: boolean = false;
@@ -156,6 +170,46 @@ export class ProfileDialogComponent {
             isResponseEnabled: true,
             currentIconType: 'failure',
         }))
+    }
+
+    public updateProfilePicture(): void {
+        this.responseLoadingProfilePhoto = true;
+        this.errorMessage = '';
+
+        this.userService.updateProfilePhoto({
+            photo: this.profilePicUser,
+        }).then((response) => {
+            if (response.success) {
+                // Definindo os dados do usuário na sessão
+                Storage.set('user', response.data);
+
+                // Definindo a resposta do botão de alteração
+                this.currentIconType = 'success';
+
+                // Alterando a aba de resposta
+                this.toggleResponse();
+
+                // Desativando o loader do botão
+                this.responseLoadingProfilePhoto = false;
+            }
+        }).catch((error) => Object.assign(this, {
+            errorMessage: error,
+            responseLoadingProfilePhoto: false,
+            isResponseEnabled: true,
+            currentIconType: 'failure',
+        }));
+    }
+
+    public getClassProfilePic(currentProfileOption: string): string {
+        let currentProfileClass = 'image-profile-option';
+        if (currentProfileOption === this.profilePicUser) {
+            currentProfileClass += ' active-profile';
+        }
+        return currentProfileClass;
+    }
+
+    public changeProfilePicture(profilePicType: string): void {
+        this.profilePicUser = profilePicType;
     }
 
     public toggleResponse(): void {

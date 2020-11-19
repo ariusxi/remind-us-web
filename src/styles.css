@@ -1,3 +1,5 @@
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 :root {
 
     font-size: 60%;
@@ -47,4 +49,45 @@ a.fc-col-header-cell-cushion {
 
 .image-category {
     width: 40%;
+}
+
+.cdk-overlay-pane.my-dialog {
+    position: relative !important;
+}
+
+.mat-tab-body-wrapper .mat-tab-body-content {
+    overflow-x: hidden;
+}
+
+.image-profile {
+    width: 25px;
+    margin-right: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.image-profile-option {
+    width: 50%;
+    position: relative;
+    display: block;
+    padding: 15px;
+    margin: 15px auto;
+
+    transition: .2s all;
+    cursor: pointer;
+}
+
+.active-profile {
+    padding: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--color-purple);
+}
+
+#close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    line-height: 14px;
+    min-width: auto;
 }
