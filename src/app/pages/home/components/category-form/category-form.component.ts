@@ -166,8 +166,6 @@ export class CategoryFormComponent {
             'false': this.updateCategory,
         })[methodType];
 
-        console.log(this)
-
         await responseMethod(this.isNewCategory.toString())(this);
     }
 
@@ -180,7 +178,6 @@ export class CategoryFormComponent {
     }
 
     public onChangeValue(value: string, dataType: string): void{
-        console.log(dataType, value);
         this[dataType] = value;
     }
 

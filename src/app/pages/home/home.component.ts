@@ -15,18 +15,32 @@ import { ProfileDialogComponent } from './components/profile-dialog/profile-dial
 export class HomeComponent {
 
     public userProfile: User = Storage.get('user');
+    public userProfilePhoto: string;
 
     constructor(
         private route: Router,
         private dialog: MatDialog,
-    ) {}
+    ) {
+        Object.assign(this, {
+            userProfilePhoto: this.userProfile.photo && this.userProfile.photo !== '' ? `/assets/images/user-icons/${this.userProfile.photo}.png` : ``,
+        });
+        console.log(this);
+    }
 
     public getFirstName(): string {
         return this.userProfile.name.split(" ")[0];
     }
 
     public showProfile(): void {
-        this.dialog.open(ProfileDialogComponent);
+        const profileDialog = this.dialog.open(ProfileDialogComponent, {
+            panelClass: 'my-dialog',
+            width: '750px',
+        });
+
+        profileDialog.afterClosed().subscribe(() => {
+            this.userProfile = Storage.get('user');
+            this.userProfilePhoto = this.userProfile.photo !== '' ? `/assets/images/user-icons/${this.userProfile.photo}.png` : ``;
+        })
     }
 
     public logout(): void {

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -55,6 +56,11 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { TabBodyComponent } from './components/tab-body/tab-body.component';
 import { TextComponent } from './components/text/text.component';
 
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,6 +106,7 @@ import { TextComponent } from './components/text/text.component';
     NgxSkeletonLoaderModule,
     // Material Theme
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,

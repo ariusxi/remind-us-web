@@ -1,24 +1,23 @@
 <div
-    class="row"
     *ngIf="!isResponseEnabled">
-    <div class="col-md-10 col-xs-10">
-        <h1 mat-dialog-title
-            *ngIf="isNewCategory">
-            Criar categoria
-        </h1>
-        <h1 mat-dialog-title
-            *ngIf="!isNewCategory">
-            Editar categoria
-        </h1>
-    </div>
-    <div class="col-md-2 col-xs-2 text-right">
-        <input-button
-            mat-dialog-close
-            id="close-button"
-            [buttonType]="'icon-button'"
-            [buttonIcon]="'close'">
-        </input-button>
-    </div>
+    <input-button
+        mat-dialog-close
+        id="close-button"
+        [buttonType]="'icon-button'"
+        [buttonIcon]="'close'">
+    </input-button>
+    <text
+        tag="h1"
+        mat-dialog-title
+        *ngIf="isNewCategory"
+        [textValue]="'Criar categoria'">
+    </text>
+    <text
+        tag="h1"
+        mat-dialog-title
+        *ngIf="!isNewCategory"
+        [textValue]="'Editar categoria'">
+    </text>
 </div>
 <div mat-dialog-content>
     <div

@@ -5,8 +5,15 @@
     <input-button
         [buttonType]="'icon-button'"
         [buttonIcon]="'account_circle'"
+        *ngIf="userProfilePhoto === ''"
         (click)="showProfile()">
     </input-button>
+    <image
+        [className]="'image-profile'"
+        [url]="userProfilePhoto"
+        *ngIf="userProfilePhoto !== ''"
+        (click)="showProfile()">
+    </image>
     <input-button
         [buttonType]="'icon-button'"
         [buttonIcon]="'logout'"
