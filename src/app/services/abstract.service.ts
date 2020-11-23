@@ -1,6 +1,6 @@
 'use strict'
 
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -41,10 +41,22 @@ export class AbstractService<T> {
         return ['get', 'delete'].includes(methodType) ? 'get' : 'default';
     }
 
-    private getCurrentHttpOptions(isAuth: boolean) {
+    private getCurrentHttpOptions(isAuth: boolean, methodType: string = 'get', dataRequisition: any = {}) {
+        // Adicionando parametros à url
+        let params = new HttpParams();
+        if (methodType === 'get' && Object.keys(dataRequisition).length > 0) {
+            const {page, limit} = dataRequisition;
+
+            // Adicionando parametros para url tipo GET
+            params = new HttpParams()
+                .set('page', page)
+                .set('limit', limit);
+        }
+
         if (isAuth) {
             const sessionToken = Storage.get('token');
             return ({
+                params,
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',
                     'x-access-token': sessionToken,
@@ -53,6 +65,7 @@ export class AbstractService<T> {
         }
 
         return ({
+            params,
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
             }),
@@ -73,9 +86,9 @@ export class AbstractService<T> {
         return throwError(errorMessage);
     }
 
-    public urlRequisition(endpoint: string, methodType: string = 'get', isAuthRoute: boolean = false): Observable<T> {
+    public urlRequisition(endpoint: string, methodType: string = 'get', dataRequisition: object = {}, isAuthRoute: boolean = false): Observable<T> {
         const route: string = this.getEndPointRoute(endpoint);
-        const httpOptions: object = this.getCurrentHttpOptions(isAuthRoute);
+        const httpOptions: object = this.getCurrentHttpOptions(isAuthRoute, methodType, dataRequisition);
 
         return this.httpClient[methodType]<T>(route, httpOptions)
             .pipe(
@@ -87,7 +100,7 @@ export class AbstractService<T> {
     public dataRequisition(endpoint: string, methodType: string = 'post', dataRequisition: Object = {}, isAuthRoute: boolean = false): Observable<T> {
         const formattedData: string = JSON.stringify(dataRequisition);
         const route: string = this.getEndPointRoute(endpoint);
-        const httpOptions: object = this.getCurrentHttpOptions(isAuthRoute);
+        const httpOptions: object = this.getCurrentHttpOptions(isAuthRoute, methodType, dataRequisition);
 
         return this.httpClient[methodType]<T>(route, formattedData, httpOptions)
             .pipe(
@@ -99,7 +112,7 @@ export class AbstractService<T> {
     public sendRequisition(endpoint: string, methodType: string = 'get', dataRequisition: Object = {}, isAuthRoute: boolean = false): any {
         const currentMethodType: string = this.getCurrentMethodType(methodType);
         const getRequisitionMethod = (type: string) => ({
-            'get': () => this.urlRequisition(endpoint, methodType, isAuthRoute),
+            'get': () => this.urlRequisition(endpoint, methodType, dataRequisition, isAuthRoute),
             'default': () => this.dataRequisition(endpoint, methodType, dataRequisition, isAuthRoute),
         }[type]);
 

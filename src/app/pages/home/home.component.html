@@ -8,12 +8,16 @@
         *ngIf="userProfilePhoto === ''"
         (click)="showProfile()">
     </input-button>
-    <image
-        [className]="'image-profile'"
-        [url]="userProfilePhoto"
+    <span
+        class="pr-4 button-profile"
         *ngIf="userProfilePhoto !== ''"
         (click)="showProfile()">
-    </image>
+        <image
+            [className]="'image-profile'"
+            [url]="userProfilePhoto">
+        </image>
+        {{getFirstName()}}
+    </span>
     <input-button
         [buttonType]="'icon-button'"
         [buttonIcon]="'logout'"

@@ -47,6 +47,7 @@ export class CategoriesComponent implements OnInit{
                 isNew: true,
                 refreshCategories: this.loadCategories,
             },
+            panelClass: 'my-dialog',
         });
 
         createDialog.afterClosed().subscribe(async () => {

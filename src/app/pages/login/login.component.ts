@@ -1,9 +1,12 @@
 import { Router } from '@angular/router';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { UserService } from 'src/app/services/user.service';
 import { NonValidInput, Validator } from 'src/app/utils/classes/Validator';
 import Storage from 'src/app/utils/classes/Storage';
+
+import { ServiceTermsComponent } from './components/service-terms/service-terms.component';
 
 @Component({
   selector: 'login',
@@ -36,6 +39,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private userService: UserService,
+        private dialog: MatDialog,
         private route: Router,
     ) { }
 
@@ -151,7 +155,11 @@ export class LoginComponent implements OnInit {
         }))
     }
 
-    hasError(fieldName: string): NonValidInput {
+    public showServiceTerms(): void {
+        this.dialog.open(ServiceTermsComponent);
+    }
+
+    public hasError(fieldName: string): NonValidInput {
         return this.errorsMessage.find((currentField) => currentField.fieldName === fieldName);
     }
 

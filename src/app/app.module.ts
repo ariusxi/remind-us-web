@@ -51,6 +51,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ProfileDialogComponent } from './pages/home/components/profile-dialog/profile-dialog.component';
 import { RemindersComponent } from './pages/home/components/reminders/reminders.component';
+import { ServiceTermsComponent } from './pages/login/components/service-terms/service-terms.component';
 import { ScheduleComponent } from './pages/home/components/schedule/schedule.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabBodyComponent } from './components/tab-body/tab-body.component';
@@ -85,6 +86,7 @@ registerLocaleData(localePt);
     PaginatorComponent,
     ProfileDialogComponent,
     RemindersComponent,
+    ServiceTermsComponent,
     ScheduleComponent,
     TabsComponent,
     TabBodyComponent,
