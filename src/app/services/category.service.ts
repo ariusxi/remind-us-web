@@ -63,6 +63,16 @@ export class CategoryService extends AbstractService<Category> {
 
     /**
      * @param {Category} category
+     * @description Método que efetua a busca em lista das categorias com base no usuário
+     * @returns {Promise<ResponseApi<Category[]>>}
+     * @memberof CategoryService
+     */
+    async getAllList(): Promise<ResponseApi<Category[]>>{
+        return await this.sendRequisition(`category/get-all-list`, 'get', {}, true);
+    }
+
+    /**
+     * @param {Category} category
      * @description Método que efetua a remoção de uma categoria pelo id
      * @returns {Promise<ResponseApi<Category>>}
      * @memberof CategoryService
