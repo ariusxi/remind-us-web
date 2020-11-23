@@ -1,5 +1,5 @@
 <mat-form-field>
-    <mat-label *ngIf="isAttributeExists(labelText)">{{labelText}}</mat-label>
+    <mat-label *ngIf="isAttributeExists(labelText)">{{ labelText }}</mat-label>
     <!-- Input -->
     <input
         matInput
@@ -48,7 +48,8 @@
         [disabled]="disabled"
         [value]="inputValue"
         (keyup)="onChangeInput()"
-        ngDefaultControl>
+        ngDefaultControl
+    >
     </textarea>
 
     <!-- Select -->
@@ -65,31 +66,59 @@
         [disabled]="disabled"
         [value]="inputValue"
         (keyup)="onChangeInput()"
-        ngDefaultControl>
+        ngDefaultControl
+    >
         <mat-option
             *ngFor="let currentOption of options"
-            value="currentOption.value">
-            {{currentOption.label}}
+            value="currentOption.value"
+        >
+            {{ currentOption.label }}
         </mat-option>
     </mat-select>
+    <!-- DatePicker -->
+    <input
+        matInput
+        *ngIf="inputType === 'datetimepicker'"
+        [ngxMatDatetimePicker]="picker"
+        placeholder="Choose a date"
+        [formControl]="dateControl"
+        [min]="minDate"
+        [max]="maxDate"
+        [disabled]="disabled"
+    />
+    <mat-datepicker-toggle
+        *ngIf="inputType === 'datetimepicker'"
+        matSuffix
+        [for]="picker"
+    ></mat-datepicker-toggle>
+    <ngx-mat-datetime-picker
+        #picker
+        *ngIf="inputType === 'datetimepicker'"
+        [showSpinners]="showSpinners"
+        [showSeconds]="showSeconds"
+        [stepHour]="stepHour"
+        [stepMinute]="stepMinute"
+        [stepSecond]="stepSecond"
+        [touchUi]="touchUi"
+        [color]="color"
+        [enableMeridian]="enableMeridian"
+        [disableMinute]="disableMinute"
+        [hideTime]="hideTime"
+    >
+    </ngx-mat-datetime-picker>
 
     <!-- Hint -->
-    <mat-hint
-        *ngIf="isAttributeExists(hintText)"
-        [align]="hintPosition">
-        {{hintText}}
+    <mat-hint *ngIf="isAttributeExists(hintText)" [align]="hintPosition">
+        {{ hintText }}
     </mat-hint>
 
     <!-- Error -->
-    <mat-error
-        [hidden]="!errorField">
-        <p>{{inputName}} é obrigatório</p>
+    <mat-error [hidden]="!errorField">
+        <p>{{ inputName }} é obrigatório</p>
     </mat-error>
 
     <!-- Icon -->
-    <mat-icon
-        matSuffix
-        *ngIf="isAttributeExists(iconType)">
-        {{iconType}}
+    <mat-icon matSuffix *ngIf="isAttributeExists(iconType)">
+        {{ iconType }}
     </mat-icon>
 </mat-form-field>
