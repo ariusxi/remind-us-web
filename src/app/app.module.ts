@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -60,77 +61,73 @@ import {
     NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
 
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
+
 @NgModule({
-    declarations: [
-        AppComponent,
-        // Pages
-        HomeComponent,
-        LoginComponent,
-        // Components
-        CalendarComponent,
-        CardComponent,
-        CategoriesComponent,
-        CategoryFormComponent,
-        CategoryRemoveComponent,
-        CheckboxComponent,
-        DividerComponent,
-        DotComponent,
-        IconComponent,
-        IconResponseComponent,
-        ImageComponent,
-        InputButtonComponent,
-        InputFieldComponent,
-        NavbarComponent,
-        PaginatorComponent,
-        ProfileDialogComponent,
-        RemindersComponent,
-        ScheduleComponent,
-        TabsComponent,
-        TabBodyComponent,
-        TextComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        // Calendar
-        CalendarModule.forRoot({
-            provide: DateAdapter,
-            useFactory: adapterFactory,
-        }),
-        // Skeletor
-        NgxSkeletonLoaderModule,
-        // Material Theme
-        MatButtonModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatIconModule,
-        MatInputModule,
-        MatPaginatorModule,
-        MatSelectModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        BrowserModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatDatepickerModule,
-        MatInputModule,
-        NgxMatTimepickerModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        NgxMatDatetimePickerModule,
-    ],
-    providers: [
-        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-        JwtHelperService,
-    ],
-    bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    // Pages
+    HomeComponent,
+    LoginComponent,
+    // Components
+    CalendarComponent,
+    CardComponent,
+    CategoriesComponent,
+    CategoryFormComponent,
+    CategoryRemoveComponent,
+    CheckboxComponent,
+    DividerComponent,
+    DotComponent,
+    IconComponent,
+    IconResponseComponent,
+    ImageComponent,
+    InputButtonComponent,
+    InputFieldComponent,
+    NavbarComponent,
+    PaginatorComponent,
+    ProfileDialogComponent,
+    RemindersComponent,
+    ScheduleComponent,
+    TabsComponent,
+    TabBodyComponent,
+    TextComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    // Calendar
+    CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory,
+    }),
+    // Skeletor
+    NgxSkeletonLoaderModule,
+    // Material Theme
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatIconModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+  ],
+  providers: [
+      { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+      JwtHelperService,
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

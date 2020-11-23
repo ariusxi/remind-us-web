@@ -63,6 +63,7 @@ export class CategoriesComponent implements OnInit{
                 colorCategory: category.color,
                 descriptionCategory: category.description,
             },
+            panelClass: 'my-dialog',
         });
 
         editDialog.afterClosed().subscribe(async () => {
