@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row pt-5">
+        <div
+            class="col-md-12"
+            *ngIf="isLoading">
+            <ngx-skeleton-loader count="10" appearance="square">
+            </ngx-skeleton-loader>
+        </div>
+        <div
+            class="col-md-12 text-center"
+            *ngIf="!isLoading && reminderList.docs.length === 0">
+            <image
+                [url]="iconRemind"
+                [className]="'image-remind'">
+            </image>
+            <text
+                tag="h3"
+                [textValue]="'Ops, parece que você não tem nenhum lembrete cadastrado :/'">
+            </text>
+            <input-button
+                (click)="showReminderForm()"
+                [buttonType]="'raised-button'"
+                [buttonText]="'Cadastrar lembrete'">
+            </input-button>
+        </div>
+        <div
+            class="col-md-4 pt-2"
+            *ngFor="let currentReminder of reminderList.docs">
+            <card>
+                <mat-card-content>
+                    <text
+                        tag="h3"
+                        [textValue]="currentReminder.title">
+                    </text>
+                    <text
+                        tag="p"
+                        [textValue]="currentReminder.description"
+                        *ngIf="currentReminder.description !== ''">
+                    </text>
+                </mat-card-content>
+                <mat-card-actions>
+                    <input-button
+                        [tooltipText]="'Editar'"
+                        [buttonType]="'icon-button'"
+                        [buttonIcon]="'create'"
+                        (click)="editReminder(currentReminder)">
+                    </input-button>
+                    <input-button
+                        [tooltipText]="'Excluir'"
+                        [buttonType]="'icon-button'"
+                        [buttonIcon]="'delete'"
+                        (click)="removeReminder(currentReminder)">
+                    </input-button>
+                </mat-card-actions>
+            </card>
+        </div>
+    </div>
+</div>

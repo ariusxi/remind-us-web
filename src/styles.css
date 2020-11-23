@@ -45,6 +45,6 @@ a.fc-col-header-cell-cushion {
     color: var(--color-white);
 }
 
-.image-category {
+.image-category, .image-remind {
     width: 40%;
 }

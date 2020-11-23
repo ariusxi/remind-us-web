@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -54,68 +55,82 @@ import { ScheduleComponent } from './pages/home/components/schedule/schedule.com
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabBodyComponent } from './components/tab-body/tab-body.component';
 import { TextComponent } from './components/text/text.component';
+import {
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    // Pages
-    HomeComponent,
-    LoginComponent,
-    // Components
-    CalendarComponent,
-    CardComponent,
-    CategoriesComponent,
-    CategoryFormComponent,
-    CategoryRemoveComponent,
-    CheckboxComponent,
-    DividerComponent,
-    DotComponent,
-    IconComponent,
-    IconResponseComponent,
-    ImageComponent,
-    InputButtonComponent,
-    InputFieldComponent,
-    NavbarComponent,
-    PaginatorComponent,
-    ProfileDialogComponent,
-    RemindersComponent,
-    ScheduleComponent,
-    TabsComponent,
-    TabBodyComponent,
-    TextComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    // Calendar
-    CalendarModule.forRoot({
-        provide: DateAdapter,
-        useFactory: adapterFactory,
-    }),
-    // Skeletor
-    NgxSkeletonLoaderModule,
-    // Material Theme
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatIconModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-  ],
-  providers: [
-      { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-      JwtHelperService,
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        // Pages
+        HomeComponent,
+        LoginComponent,
+        // Components
+        CalendarComponent,
+        CardComponent,
+        CategoriesComponent,
+        CategoryFormComponent,
+        CategoryRemoveComponent,
+        CheckboxComponent,
+        DividerComponent,
+        DotComponent,
+        IconComponent,
+        IconResponseComponent,
+        ImageComponent,
+        InputButtonComponent,
+        InputFieldComponent,
+        NavbarComponent,
+        PaginatorComponent,
+        ProfileDialogComponent,
+        RemindersComponent,
+        ScheduleComponent,
+        TabsComponent,
+        TabBodyComponent,
+        TextComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        // Calendar
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }),
+        // Skeletor
+        NgxSkeletonLoaderModule,
+        // Material Theme
+        MatButtonModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatIconModule,
+        MatInputModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatDatepickerModule,
+        MatInputModule,
+        NgxMatTimepickerModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        NgxMatDatetimePickerModule,
+    ],
+    providers: [
+        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService,
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

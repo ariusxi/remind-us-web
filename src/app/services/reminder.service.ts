@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 
-import { Category } from '../models/Category';
+import { Reminder } from '../models/Reminder';
 import { AbstractService, Paginate, ResponseApi } from './abstract.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class CategoryService extends AbstractService<Category> {
+export class ReminderService extends AbstractService<Reminder> {
 
     /**
-     * @param {Category} category
+     * @param {Reminder} reminder
      * @description Método que efetua o cadastro de categorias
-     * @returns {Promise<ResponseApi<Category>>}
-     * @memberof CategoryService
+     * @returns {Promise<ResponseApi<Reminder>>}
+     * @memberof ReminderService
      */
-    async create(category: Category): Promise<ResponseApi<Category>> {
-        return await this.sendRequisition(`category/create`, 'post', category, true);
+    async create(reminder: Reminder): Promise<ResponseApi<Reminder>> {
+        return await this.sendRequisition(`reminder/create`, 'post', reminder, true);
     }
 
     /**
@@ -24,8 +24,8 @@ export class CategoryService extends AbstractService<Category> {
      * @returns {Promise<ResponseApi<Category>>}
      * @memberof CategoryService
      */
-    async update(id: string, category: Category): Promise<ResponseApi<Category>> {
-        return await this.sendRequisition(`category/update/${id}`, 'put', category, true);
+    async update(id: string, reminder: Reminder): Promise<ResponseApi<Reminder>> {
+        return await this.sendRequisition(`category/update/${id}`, 'put', reminder, true);
     }
 
     /**
@@ -34,7 +34,7 @@ export class CategoryService extends AbstractService<Category> {
      * @returns {Promise<ResponseApi<Category>>}
      * @memberof CategoryService
      */
-    async get(id: string): Promise<ResponseApi<Category>> {
+    async get(id: string): Promise<ResponseApi<Reminder>> {
         return await this.sendRequisition(`category/get/${id}`, 'get', true);
     }
 
@@ -44,18 +44,8 @@ export class CategoryService extends AbstractService<Category> {
      * @returns {Promise<ResponseApi<Category>>}
      * @memberof CategoryService
      */
-    async getAll(): Promise<ResponseApi<Paginate<Category>>> {
+    async getAll(): Promise<ResponseApi<Paginate<Reminder>>> {
         return await this.sendRequisition(`category/get-all`, 'get', {}, true);
-    }
-
-    /**
-     * @param {Category} category
-     * @description Método que efetua a busca em lista das categorias com base no usuário
-     * @returns {Promise<ResponseApi<Category[]>>}
-     * @memberof CategoryService
-     */
-    async getAllList(): Promise<ResponseApi<Category[]>>{
-        return await this.sendRequisition(`category/get-all-list`, 'get', {}, true);
     }
 
     /**
@@ -64,7 +54,7 @@ export class CategoryService extends AbstractService<Category> {
      * @returns {Promise<ResponseApi<Category>>}
      * @memberof CategoryService
      */
-    async delete(id: string): Promise<ResponseApi<Category>> {
+    async delete(id: string): Promise<ResponseApi<Reminder>> {
         return await this.sendRequisition(`category/remove/${id}`, 'delete', {}, true);
     }
 
