@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Category } from 'src/app/models/Category';
@@ -13,33 +13,18 @@ import { CategoryRemoveComponent } from '../category-remove/category-remove.comp
     templateUrl: './categories.component.html',
     styleUrls: ['./categories.component.css'],
 })
-export class CategoriesComponent implements OnInit{
+export class CategoriesComponent {
 
-    public isLoading: boolean = true;
-    public categoriesList: Paginate<Category>;
+    @Output() loadContent: EventEmitter<string> = new EventEmitter();
+
+    @Input() isLoading: boolean = true;
+    @Input() categoriesList: Paginate<Category>;
 
     public iconCategory: string ='/assets/images/icon-category.png';
 
     constructor(
-        private categoryService: CategoryService,
         private dialog: MatDialog,
     ) { }
-
-
-    async ngOnInit(): Promise<void> {
-        await this.loadCategories();
-    }
-
-    public async loadCategories(): Promise<void> {
-        this.categoryService.getAll()
-            .then((response) => {
-                if (response.success) {
-                    this.categoriesList = response.data;
-                }
-                this.isLoading = false;
-            })
-            .catch((err) => console.error(err))
-    }
 
     public showCategoryForm(): void {
         const createDialog = this.dialog.open(CategoryFormComponent, {
@@ -50,7 +35,7 @@ export class CategoriesComponent implements OnInit{
         });
 
         createDialog.afterClosed().subscribe(async () => {
-            await this.loadCategories();
+            this.loadContent.emit();
         });
     }
 
@@ -67,7 +52,7 @@ export class CategoriesComponent implements OnInit{
         });
 
         editDialog.afterClosed().subscribe(async () => {
-            await this.loadCategories();
+            this.loadContent.emit();
         })
     }
 
@@ -80,7 +65,7 @@ export class CategoriesComponent implements OnInit{
         });
 
         removeDialog.afterClosed().subscribe(async () => {
-            await this.loadCategories();
+            this.loadContent.emit();
         })
     }
 

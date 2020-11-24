@@ -1,5 +1,5 @@
 import { format, addHours } from 'date-fns';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { User } from 'src/app/models/User';
@@ -17,33 +17,28 @@ import { ReminderRemoveComponent } from '../reminder-remove/reminder-remove.comp
     templateUrl: './reminders.component.html',
     styleUrls: ['./reminders.component.css'],
 })
-export class RemindersComponent implements OnInit{
+export class RemindersComponent {
+
+    @Output() loadContent: EventEmitter<string> = new EventEmitter();
+
+    @Input() isLoading: boolean = true;
+    @Input() reminderList: Paginate<Reminder>;
+    @Input() reminderListOfWeek: Reminder[];
 
     public userProfile: User = Storage.get('user');
-
-    public isLoading: boolean = true;
-    public reminderList: Paginate<Reminder>;
-    public reminderListOfWeek: Reminder[];
 
     public iconRemind: string ='/assets/images/iconRemind.png';
 
     constructor(
-        private reminderService: ReminderService,
         private dialog: MatDialog,
     ) { }
 
-    async ngOnInit(): Promise<void> {
-        await this.loadReminders();
-        await this.loadRemindersOfTheWeek();
-    }
-
     public detectUrL(textString: string): string {
         let retVal = textString;
-        console.log(retVal);
         if (retVal) {
             const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             retVal = textString.replace(urlRegex, (url) => {
-                return `<a href="${url}" target="_blank">${url}</a>`;
+                return `<a href="${url}" target="_blank" class="url-reminder">${url}</a>`;
             })
         }
 
@@ -54,30 +49,6 @@ export class RemindersComponent implements OnInit{
         return format(addHours(new Date(dateString), 3), 'dd/MM/yyyy HH:ii:ss');
     }
 
-    public async loadReminders(): Promise<void> {
-        this.reminderService.getAll()
-            .then((response) => {
-                if (response.success) {
-                    this.reminderList = response.data;
-                }
-                this.isLoading = false;
-            })
-            .catch((err) => console.error(err))
-    }
-
-    public async loadRemindersOfTheWeek(): Promise<void> {
-        this.reminderService.getAllByPeriod(
-            this.userProfile._id,
-            'week',
-        ).then((response) => {
-            if (response.success) {
-                this.reminderListOfWeek = response.data;
-            }
-            this.isLoading = false;
-        })
-        .catch((err) => console.error(err))
-    }
-
     public showReminderForm(): void {
         const createDialog = this.dialog.open(ReminderFormComponent, {
             data: {
@@ -86,8 +57,8 @@ export class RemindersComponent implements OnInit{
             panelClass: 'my-dialog',
         });
 
-        createDialog.afterClosed().subscribe(async () => {
-            await this.loadReminders();
+        createDialog.afterClosed().subscribe(() => {
+            this.loadContent.emit();
         });
     }
 
@@ -104,8 +75,8 @@ export class RemindersComponent implements OnInit{
             panelClass: 'my-dialog',
         });
 
-        editDialog.afterClosed().subscribe(async () => {
-            await this.loadReminders();
+        editDialog.afterClosed().subscribe(() => {
+            this.loadContent.emit();
         })
     }
 
@@ -117,8 +88,8 @@ export class RemindersComponent implements OnInit{
             },
         });
 
-        removeDialog.afterClosed().subscribe(async () => {
-            await this.loadReminders();
+        removeDialog.afterClosed().subscribe(() => {
+            this.loadContent.emit();
         })
     }
 

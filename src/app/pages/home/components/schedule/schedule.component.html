@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row">
         <div
-            *ngIf="isLoadingCalendar"
+            *ngIf="isLoading"
             class="col-md-12 pt-3">
             <ngx-skeleton-loader count="10" appearance="square">
             </ngx-skeleton-loader>
         </div>
         <div
-            *ngIf="!isLoadingCalendar"
+            *ngIf="!isLoading"
             class="col-md-12 pt-3">
             <calendar
                 (editReminder)="editReminder($event)"
