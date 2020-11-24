@@ -45,7 +45,6 @@ export class CategoriesComponent implements OnInit{
         const createDialog = this.dialog.open(CategoryFormComponent, {
             data: {
                 isNew: true,
-                refreshCategories: this.loadCategories,
             },
             panelClass: 'my-dialog',
         });

@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, addHours } from 'date-fns';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -36,11 +36,11 @@ export class ReminderFormComponent implements OnInit {
 
     // Reminder
     public idReminder: string;
-    public nameReminder: string;
+    public nameReminder: string = '';
     public categoryReminder: string;
     public scheduledReminder: string;
     public hourReminder: string;
-    public descriptionReminder: string;
+    public descriptionReminder: string = '';
 
     public isNewReminder: boolean = false;
 
@@ -75,6 +75,11 @@ export class ReminderFormComponent implements OnInit {
             date: dateTimeParams[0],
             time: dateTimeParams[1],
         })
+    }
+
+    public formatDateScheduled(dateString: string, hourString: string): string {
+        const formattedHour = hourString.length < 8 ? `${hourString}:00` : hourString;
+        return format(addHours(new Date(`${dateString}T${formattedHour}.000Z`), 3), 'yyyy-MM-dd HH:ii:ss');
     }
 
     public resetValues(): void {
@@ -130,16 +135,19 @@ export class ReminderFormComponent implements OnInit {
             if (currentErrorMessage.fieldProperty.date) {
                 errorMessage = `${currentErrorMessage.originalName} não pode ser uma data no passado.`;
             }
+            if (currentErrorMessage.fieldProperty.hour) {
+                errorMessage = `${currentErrorMessage.originalName} hora inválida.`;
+            }
         })
 
         return errorMessage
     }
 
     public getNameReminder(name: string, description: string = ''): string {
-        if (name === '' && description !== '') {
+        if ((!name || name === '') && description !== '') {
             return `${description.substring(0, 20)}...`;
         }
-        if (name === '' && description === '') {
+        if ((!name || name === '') && description === '') {
             return '(Sem título)';
         }
         return name;
@@ -148,6 +156,8 @@ export class ReminderFormComponent implements OnInit {
     private async registerReminder(context: any): Promise<void> {
         const validator = new Validator([
             { inputName: 'scheduledReminder', inputValue: context.scheduledReminder, originalName: 'Data do lembrete', functions: ['required', 'date'] },
+            { inputName: 'hourReminder', inputValue: context.hourReminder, originalName: 'Hora do lembrete', functions: ['required', 'hour'] },
+            { inputName: 'categoryReminder', inputValue: context.categoryReminder, originalName: 'Categoria do Lembrete', functions: ['required'] },
         ]);
         const resultValidator = validator.validate();
 
@@ -161,12 +171,13 @@ export class ReminderFormComponent implements OnInit {
             context.resetValues();
             return;
         }
+        const scheduledReminderFormatted = context.formatDateScheduled(context.scheduledReminder, context.hourReminder);
 
         context.reminderService.create({
             data: {
                 name: context.nameReminder,
-                category: context.categoryReminder,
-                scheduled: context.scheduledReminder,
+                category: context.categoryReminder !== '' ? context.categoryReminder : null,
+                scheduled: scheduledReminderFormatted,
                 description: context.descriptionReminder,
             },
         }).then((response) => {
@@ -191,6 +202,8 @@ export class ReminderFormComponent implements OnInit {
     private async updateReminder(context: any): Promise<void> {
         const validator = new Validator([
             { inputName: 'scheduledReminder', inputValue: context.scheduledReminder, originalName: 'Data do lembrete', functions: ['required', 'date'] },
+            { inputName: 'hourReminder', inputValue: context.hourReminder, originalName: 'Hora do lembrete', functions: ['required', 'hour'] },
+            { inputName: 'categoryReminder', inputValue: context.categoryReminder, originalName: 'Categoria do Lembrete', functions: ['required'] },
         ]);
         const resultValidator = validator.validate();
 
@@ -204,12 +217,13 @@ export class ReminderFormComponent implements OnInit {
             context.resetValues();
             return;
         }
+        const scheduledReminderFormatted = context.formatDateScheduled(context.scheduledReminder, context.hourReminder);
 
         context.reminderService.update(context.idReminder, {
             data: {
                 name: context.nameReminder,
-                category: context.categoryReminder,
-                scheduled: context.scheduledReminder,
+                category: context.categoryReminder !== '' ? context.categoryReminder : null,
+                scheduled: scheduledReminderFormatted,
                 description: context.descriptionReminder,
             },
         }).then((response) => {
@@ -252,7 +266,7 @@ export class ReminderFormComponent implements OnInit {
         return date ? format(new Date(date), 'yyyy-MM-dd') : '';
     }
 
-    public onChangeValue(value: string, dataType: string): void{
+    public onChangeValue(value: string, dataType: string): void {
         this[dataType] = value;
     }
 

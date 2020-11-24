@@ -22,6 +22,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// Mask
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
 // Pages
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -63,6 +66,8 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 registerLocaleData(localePt);
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -111,7 +116,8 @@ registerLocaleData(localePt);
     }),
     // Skeletor
     NgxSkeletonLoaderModule,
-    // Datetimepicker
+    // Mask
+    NgxMaskModule.forRoot(),
     // Material Theme
     MatButtonModule,
     MatButtonToggleModule,

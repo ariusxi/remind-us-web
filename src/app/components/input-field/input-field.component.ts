@@ -35,6 +35,8 @@ export class InputFieldComponent extends ComponentUtils implements OnInit {
     @Input() iconType: string;
     @Input() disabled: boolean;
 
+    @Input() maskText: string = '';
+
     ngOnInit(): void {
         if (this.defaultValue !== '') {
             this.inputValue = this.defaultValue;
@@ -46,7 +48,11 @@ export class InputFieldComponent extends ComponentUtils implements OnInit {
     }
 
     public isInputType(): boolean {
-        return ['text', 'number', 'email', 'telephone', 'password', 'date'].includes(this.inputType);
+        return ['text', 'number', 'email', 'telephone', 'password'].includes(this.inputType);
+    }
+
+    public isDateInput(): boolean {
+        return ['date', 'time'].includes(this.inputType);
     }
 
     public isTextArea(): boolean {
