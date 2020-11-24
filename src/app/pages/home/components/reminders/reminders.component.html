@@ -30,10 +30,18 @@
                 <mat-card-content>
                     <text
                         tag="h3"
-                        [textValue]="currentReminder.title">
+                        [className]="'font-weight-bold'"
+                        [textValue]="currentReminder.name">
                     </text>
+                    <span
+                        class="category-reminder"
+                        *ngIf="currentReminder.category"
+                        [style.color]="currentReminder.category.color">
+                        {{currentReminder.category.title}}
+                    </span>
                     <text
                         tag="p"
+                        [className]="'pt-5'"
                         [textValue]="currentReminder.description"
                         *ngIf="currentReminder.description !== ''">
                     </text>
@@ -56,3 +64,12 @@
         </div>
     </div>
 </div>
+
+<input-button
+    id="add-reminder-bottom"
+    (click)="showReminderForm()"
+    [color]="'primary'"
+    [buttonType]="'fab-button'"
+    [buttonIcon]="'add'"
+    *ngIf="!isLoading && reminderList.docs.length > 0">
+</input-button>

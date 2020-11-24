@@ -1,89 +1,104 @@
+<div
+    *ngIf="!isResponseEnabled">
+    <input-button
+        mat-dialog-close
+        id="close-button"
+        [buttonType]="'icon-button'"
+        [buttonIcon]="'close'">
+    </input-button>
+    <text
+        tag="h1"
+        mat-dialog-title
+        *ngIf="isNewReminder"
+        [textValue]="'Criar lembrete'">
+    </text>
+    <text
+        tag="h1"
+        mat-dialog-title
+        *ngIf="!isNewReminder"
+        [textValue]="'Editar lembrete'">
+    </text>
+</div>
 <div mat-dialog-content>
-    <div class="row" *ngIf="isResponseEnabled">
-        <div class="col-md-12 text-center">
-            <icon-response [iconType]="currentIconType"> </icon-response>
+    <div
+        class="row"
+        *ngIf="isResponseEnabled">
+        <div
+            class="col-md-12 text-center">
+            <icon-response
+                [iconType]="currentIconType">
+            </icon-response>
             <text
                 tag="p"
                 *ngIf="currentIconType === 'success'"
                 [className]="'font-weight-bolder pb-2'"
-                [textValue]="
-                    isNewReminder
-                        ? 'Lembrete cadastrado com sucesso'
-                        : 'Lembrete atualizado com sucesso'
-                "
-            >
+                [textValue]="isNewReminder ? 'Lembrete cadastrado com sucesso' : 'Lembrete atualizado com sucesso'">
             </text>
             <text
                 tag="p"
                 *ngIf="currentIconType === 'failure'"
                 [className]="'font-weight-bolder pb-2'"
-                [textValue]="
-                    isNewReminder
-                        ? 'Ocorreu um erro ao cadastrar o lembrete'
-                        : 'Ocorreu um erro ao atualizar o lembrete'
-                "
-            >
+                [textValue]="isNewReminder ? 'Ocorreu um erro ao cadastrar o lembrete' : 'Ocorreu um erro ao atualizar o lembrete'">
             </text>
             <input-button
                 [buttonType]="'raised-button'"
                 [buttonText]="'Ok'"
-                (click)="closeDialog()"
-            >
+                (click)="closeDialog()">
             </input-button>
         </div>
     </div>
-    <div class="row" *ngIf="!isResponseEnabled">
-        <div class="col-md-8">
+    <div
+        class="row"
+        *ngIf="!isResponseEnabled">
+        <div class="col-md-12">
             <input-field
                 [placeholderText]="'Nome do lembrete'"
                 [inputName]="'nameReminder'"
                 [inputValue]="nameReminder"
                 [errorField]="hasError('nameReminder')"
                 [inputType]="'text'"
-                [isRequired]="true"
-                (onChangeValue)="onChangeValue($event, 'nameReminder')"
-            >
+                (onChangeValue)="onChangeValue($event, 'nameReminder')">
             </input-field>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <input-field
-                [placeholderText]="'Data do Lembrete'"
-                [inputName]="'scheduledReminder'"
-                [inputValue]="scheduledReminder"
-                [errorField]="hasError('scheduledReminder')"
-                [inputType]="'datetimepicker'"
-                (onChangeValue)="onChangeValue($event, 'scheduledReminder')"
-            >
-            </input-field>
-        </div>
-        <div class="col-md-12">
-            <input-field
-                [placeholderText]="'Escolha a categoria do seu lembrete...'"
+                [placeholderText]="'Categoria do lembrete'"
                 [inputName]="'categoryReminder'"
                 [inputValue]="categoryReminder"
                 [errorField]="hasError('categoryReminder')"
+                [options]="categoriesOptions"
                 [inputType]="'select'"
-                [options]="categoryOptions"
-                (onChangeValue)="onChangeValue($event, 'categoryReminder')"
-            >
+                (onChangeValue)="onChangeValue($event, 'categoryReminder')">
+            </input-field>
+        </div>
+        <div class="col-md-6">
+            <input-field
+                [placeholderText]="'Data do seu lembrete'"
+                [inputName]="'scheduledReminder'"
+                [inputValue]="scheduledReminder"
+                [defaultValue]="formatDate(scheduledReminder)"
+                [errorField]="hasError('scheduledReminder')"
+                [inputType]="'date'"
+                [isRequired]="true"
+                (onChangeValue)="onChangeValue($event, 'scheduledReminder')">
             </input-field>
         </div>
         <div class="col-md-12">
             <input-field
-                [placeholderText]="'Informe uma descrição do seu lembrete...'"
+                [placeholderText]="'Informe uma descrição da sua categoria...'"
                 [inputName]="'descriptionReminder'"
                 [inputValue]="descriptionReminder"
                 [errorField]="hasError('descriptionReminder')"
                 [inputType]="'textarea'"
-                (onChangeValue)="onChangeValue($event, 'descriptionReminder')"
-            >
+                (onChangeValue)="onChangeValue($event, 'descriptionReminder')">
             </input-field>
         </div>
-        <div class="col-md-12" *ngIf="errorMessage !== ''">
+        <div
+            class="col-md-12"
+            *ngIf="errorMessage !== ''">
             <text
                 [className]="'text-center text-danger'"
-                [textValue]="errorMessage"
-            >
+                [textValue]="errorMessage">
             </text>
         </div>
         <div class="col-md-12 pb-3 text-center">
@@ -91,8 +106,7 @@
                 [buttonType]="'raised-button'"
                 [buttonText]="buttonText"
                 [loading]="responseLoadingReminder"
-                (click)="submit()"
-            >
+                (click)="submit()">
             </input-button>
         </div>
     </div>

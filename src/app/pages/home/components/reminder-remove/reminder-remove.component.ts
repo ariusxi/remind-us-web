@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 import { ReminderService } from 'src/app/services/reminder.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { ReminderService } from 'src/app/services/reminder.service';
 })
 export class ReminderRemoveComponent {
 
-    // Category
+    // Reminder
     public idReminder: string;
     public nameReminder: string;
 
@@ -26,7 +25,7 @@ export class ReminderRemoveComponent {
         Object.assign(this, {
             idReminder: data.idReminder,
             nameReminder: data.nameReminder,
-        });
+        })
     }
 
     public async removeReminder(): Promise<void> {
@@ -39,10 +38,10 @@ export class ReminderRemoveComponent {
                     // Definindo a resposta da requisição
                     this.currentIconType = 'success';
 
-                    // Alternando a aba de resposta
+                    // Alterandno a aba de resposta
                     this.toggleResponse();
                 }
-            }).catch((error) => Object.assign({
+            }).catch((error) => Object.assign(this, {
                 errorMessage: error,
                 currentIconType: 'failure',
                 responseLoadingReminder: false,

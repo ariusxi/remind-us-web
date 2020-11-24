@@ -40,7 +40,6 @@ export class CategoryFormComponent {
             titleCategory: data.titleCategory,
             colorCategory: data.colorCategory,
             descriptionCategory: data.descriptionCategory,
-            refreshCategories: data.refreshCategories,
         });
     }
 

@@ -10,7 +10,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -52,17 +51,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ProfileDialogComponent } from './pages/home/components/profile-dialog/profile-dialog.component';
 import { RemindersComponent } from './pages/home/components/reminders/reminders.component';
+import { ReminderFormComponent } from './pages/home/components/reminder-form/reminder-form.component';
+import { ReminderRemoveComponent } from './pages/home/components/reminder-remove/reminder-remove.component';
 import { ServiceTermsComponent } from './pages/login/components/service-terms/service-terms.component';
 import { ScheduleComponent } from './pages/home/components/schedule/schedule.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabBodyComponent } from './components/tab-body/tab-body.component';
 import { TextComponent } from './components/text/text.component';
-import {
-    NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule,
-} from '@angular-material-components/datetime-picker';
 
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 registerLocaleData(localePt);
@@ -91,6 +88,8 @@ registerLocaleData(localePt);
     PaginatorComponent,
     ProfileDialogComponent,
     RemindersComponent,
+    ReminderFormComponent,
+    ReminderRemoveComponent,
     ServiceTermsComponent,
     ScheduleComponent,
     TabsComponent,
@@ -99,6 +98,7 @@ registerLocaleData(localePt);
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -111,6 +111,7 @@ registerLocaleData(localePt);
     }),
     // Skeletor
     NgxSkeletonLoaderModule,
+    // Datetimepicker
     // Material Theme
     MatButtonModule,
     MatButtonToggleModule,

@@ -1,9 +1,21 @@
+import { format } from 'date-fns';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { NonValidInput, Validator } from 'src/app/utils/classes/Validator';
+import { CategoryService } from 'src/app/services/category.service';
 import { ReminderService } from 'src/app/services/reminder.service';
-import { CategoryService} from 'src/app/services/category.service';
+
+import { NonValidInput, Validator } from 'src/app/utils/classes/Validator';
+
+interface CategoryOption {
+    value: string;
+    label: string;
+}
+
+interface DateTime {
+    date: string;
+    time: string;
+}
 
 @Component({
     selector: 'reminder-form',
@@ -20,42 +32,56 @@ export class ReminderFormComponent implements OnInit {
     public responseLoadingReminder: boolean = false;
 
     public isResponseEnabled: boolean = false;
+    public categoriesOptions: CategoryOption[];
 
     // Reminder
     public idReminder: string;
     public nameReminder: string;
-    public scheduledReminder: Date;
-    public descriptionReminder: string;
     public categoryReminder: string;
+    public scheduledReminder: string;
+    public hourReminder: string;
+    public descriptionReminder: string;
 
     public isNewReminder: boolean = false;
-    public categoryOptions: Object[] = [];
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<any>,
-        public reminderService: ReminderService,
         public categoryService: CategoryService,
+        public reminderService: ReminderService,
     ) {
+        const { date, time } = this.getDateAndHour(data.scheduledReminder || 'T');
+
         Object.assign(this, {
             buttonText: data.isNew ? 'Cadastrar' : 'Atualizar',
             isNewReminder: data.isNew,
             idReminder: data.idReminder,
             nameReminder: data.nameReminder,
-            scheduledReminder: data.scheduledReminder,
-            descriptionReminder: data.descriptionReminder,
+            scheduledReminder: date,
+            hourReminder: time,
             categoryReminder: data.categoryReminder,
+            descriptionReminder: data.descriptionReminder,
         });
-        console.log(this)
     }
+
     ngOnInit(): void {
-        this.getCategoriesList();
+        this.getAllCategories();
+    }
+
+    private getDateAndHour(dateTimeString: string): DateTime {
+        const dateTimeParams = dateTimeString.replace(/.000Z/g, '').split('T');
+
+        return ({
+            date: dateTimeParams[0],
+            time: dateTimeParams[1],
+        })
     }
 
     public resetValues(): void {
         Object.assign(this, {
             nameReminder: '',
-            scheduledReminder: new Date(),
+            categoryReminder: '',
+            scheduledReminder: '',
             descriptionReminder: '',
             responseLoadingReminder: false,
             isResponseEnabled: false,
@@ -63,11 +89,22 @@ export class ReminderFormComponent implements OnInit {
         })
     }
 
-    public getCategoriesList(): void {
+    public async getAllCategories(): Promise<void> {
         this.categoryService.getAllList()
-        .then((response)=>{
-            console.log(response)
-        })
+            .then((response) => {
+                if (response.success) {
+                    // Adicionando lista de categorias
+                    this.categoriesOptions = response.data.map((currentCategory) => ({
+                        label: currentCategory.title,
+                        value: currentCategory._id,
+                    }));
+                }
+            }).catch((error) => Object.assign(this, {
+                errorMessage: error,
+                responseLoadingReminder: false,
+                isResponseEnabled: true,
+                currentIconType: 'failure',
+            }))
     }
 
     public getErrorMessage(errorMessagesArray: NonValidInput[]): string {
@@ -90,16 +127,31 @@ export class ReminderFormComponent implements OnInit {
             if (currentErrorMessage.fieldProperty.maxLength) {
                 errorMessage = `${currentErrorMessage.originalName} ultrapassou o máximo de caracteres.`;
             }
+            if (currentErrorMessage.fieldProperty.date) {
+                errorMessage = `${currentErrorMessage.originalName} não pode ser uma data no passado.`;
+            }
         })
 
         return errorMessage
     }
 
+    public getNameReminder(name: string, description: string = ''): string {
+        if (name === '' && description !== '') {
+            return `${description.substring(0, 20)}...`;
+        }
+        if (name === '' && description === '') {
+            return '(Sem título)';
+        }
+        return name;
+    }
+
     private async registerReminder(context: any): Promise<void> {
         const validator = new Validator([
-            { inputName: 'nameReminder', inputValue: context.nameReminder, originalName: 'Nome do lembrete', functions: ['required'] },
+            { inputName: 'scheduledReminder', inputValue: context.scheduledReminder, originalName: 'Data do lembrete', functions: ['required', 'date'] },
         ]);
         const resultValidator = validator.validate();
+
+        context.nameReminder = context.getNameReminder(context.nameReminder, context.descriptionReminder);
 
         context.errorMessage = '';
         context.responseLoadingReminder = true;
@@ -113,9 +165,9 @@ export class ReminderFormComponent implements OnInit {
         context.reminderService.create({
             data: {
                 name: context.nameReminder,
+                category: context.categoryReminder,
                 scheduled: context.scheduledReminder,
                 description: context.descriptionReminder,
-                category: context.categoryReminder,
             },
         }).then((response) => {
             if (response.success) {
@@ -138,9 +190,11 @@ export class ReminderFormComponent implements OnInit {
 
     private async updateReminder(context: any): Promise<void> {
         const validator = new Validator([
-            { inputName: 'nameReminder', inputValue: context.nameReminder, originalName: 'Nome do lembrete', functions: ['required'] },
+            { inputName: 'scheduledReminder', inputValue: context.scheduledReminder, originalName: 'Data do lembrete', functions: ['required', 'date'] },
         ]);
         const resultValidator = validator.validate();
+
+        context.nameReminder = context.getNameReminder(context.nameReminder, context.descriptionReminder);
 
         context.errorMessage = '';
         context.responseLoadingReminder = true;
@@ -154,9 +208,9 @@ export class ReminderFormComponent implements OnInit {
         context.reminderService.update(context.idReminder, {
             data: {
                 name: context.nameReminder,
+                category: context.categoryReminder,
                 scheduled: context.scheduledReminder,
                 description: context.descriptionReminder,
-                category: context.categoryReminder,
             },
         }).then((response) => {
             if (response.success) {
@@ -192,6 +246,10 @@ export class ReminderFormComponent implements OnInit {
 
     public hasError(fieldName: string): NonValidInput {
         return this.errorsMessage.find((currentField) => currentField.fieldName === fieldName);
+    }
+
+    public formatDate(date: string): string {
+        return date ? format(new Date(date), 'yyyy-MM-dd') : '';
     }
 
     public onChangeValue(value: string, dataType: string): void{
