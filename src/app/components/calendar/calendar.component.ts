@@ -69,7 +69,6 @@ export class CalendarComponent implements OnInit {
             title: currentReminder.name,
             actions: this.actions,
         }));
-        console.log(this.events);
     }
 
     public eventTimesChanged({ event, newStart, newEnd } : CalendarEventTimesChangedEvent) : void {

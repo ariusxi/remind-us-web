@@ -70,7 +70,6 @@ export class ReminderFormComponent implements OnInit {
 
     private getDateAndHour(dateTimeString: string): DateTime {
         const dateTimeParams = dateTimeString.replace(/.000Z/g, '').split('T');
-
         return ({
             date: dateTimeParams[0],
             time: dateTimeParams[1],
