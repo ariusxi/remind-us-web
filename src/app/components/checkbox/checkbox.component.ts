@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { ComponentUtils } from 'src/app/utils/classes/ComponentUtils';
+
 @Component({
     selector: 'checkbox',
     templateUrl: './checkbox.component.html',
     styleUrls: ['./checkbox.component.css'],
 })
-export class CheckboxComponent {
+export class CheckboxComponent extends ComponentUtils {
 
     @Output() onChangeValue: EventEmitter<string> = new EventEmitter();
     @Output() onIndeterminate: EventEmitter<string> = new EventEmitter();

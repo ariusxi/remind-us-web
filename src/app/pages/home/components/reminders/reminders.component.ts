@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
+import { User } from 'src/app/models/User';
 import { Reminder } from 'src/app/models/Reminder';
+
 import { Paginate } from 'src/app/services/abstract.service';
 import { ReminderService } from 'src/app/services/reminder.service';
+
+import Storage from 'src/app/utils/classes/Storage';
 
 import { ReminderFormComponent } from '../reminder-form/reminder-form.component';
 import { ReminderRemoveComponent } from '../reminder-remove/reminder-remove.component';
@@ -12,18 +16,24 @@ import { ReminderRemoveComponent } from '../reminder-remove/reminder-remove.comp
     templateUrl: './reminders.component.html',
     styleUrls: ['./reminders.component.css'],
 })
-export class RemindersComponent {
+export class RemindersComponent implements OnInit{
+
+    public userProfile: User = Storage.get('user');
+
     public isLoading: boolean = true;
     public reminderList: Paginate<Reminder>;
+    public reminderListOfWeek: Reminder[];
 
     public iconRemind: string ='/assets/images/iconRemind.png';
 
     constructor(
         private reminderService: ReminderService,
         private dialog: MatDialog,
-       )  { }
-       async ngOnInit(): Promise<void> {
+    ) { }
+
+    async ngOnInit(): Promise<void> {
         await this.loadReminders();
+        await this.loadRemindersOfTheWeek();
     }
 
     public async loadReminders(): Promise<void> {
@@ -37,11 +47,25 @@ export class RemindersComponent {
             .catch((err) => console.error(err))
     }
 
+    public async loadRemindersOfTheWeek(): Promise<void> {
+        this.reminderService.getAllByPeriod(
+            this.userProfile._id,
+            'week',
+        ).then((response) => {
+            if (response.success) {
+                this.reminderListOfWeek = response.data;
+            }
+            this.isLoading = false;
+        })
+        .catch((err) => console.error(err))
+    }
+
     public showReminderForm(): void {
         const createDialog = this.dialog.open(ReminderFormComponent, {
             data: {
                 isNew: true,
             },
+            panelClass: 'my-dialog',
         });
 
         createDialog.afterClosed().subscribe(async () => {
@@ -57,8 +81,9 @@ export class RemindersComponent {
                 nameReminder: reminder.name,
                 scheduledReminder: reminder.scheduled,
                 descriptionReminder: reminder.description,
-                categoryReminder: reminder.category,
+                categoryReminder: reminder.category._id,
             },
+            panelClass: 'my-dialog',
         });
 
         editDialog.afterClosed().subscribe(async () => {

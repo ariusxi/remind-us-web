@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { ComponentUtils } from 'src/app/utils/classes/ComponentUtils';
 import { NonValidInput } from 'src/app/utils/classes/Validator';
@@ -13,7 +13,7 @@ interface SelectOption {
     templateUrl: './input-field.component.html',
     styleUrls: ['./input-field.component.css'],
 })
-export class InputFieldComponent extends ComponentUtils {
+export class InputFieldComponent extends ComponentUtils implements OnInit {
 
     @Output() onChangeValue: EventEmitter<string> = new EventEmitter();
 
@@ -27,12 +27,19 @@ export class InputFieldComponent extends ComponentUtils {
 
     @Input() inputName: string;
     @Input() inputType: string = 'text';
+    @Input() defaultValue: string = '';
     @Input() options: SelectOption[];
     @Input() inputValue: string = '';
     @Input() className: string;
 
     @Input() iconType: string;
     @Input() disabled: boolean;
+
+    ngOnInit(): void {
+        if (this.defaultValue !== '') {
+            this.inputValue = this.defaultValue;
+        }
+    }
 
     public onChangeInput(): void {
         this.onChangeValue.emit(this.inputValue);

@@ -24,7 +24,6 @@ export class HomeComponent {
         Object.assign(this, {
             userProfilePhoto: this.userProfile.photo && this.userProfile.photo !== '' ? `/assets/images/user-icons/${this.userProfile.photo}.png` : ``,
         });
-        console.log(this);
     }
 
     public getFirstName(): string {

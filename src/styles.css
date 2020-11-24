@@ -59,11 +59,15 @@ a.fc-col-header-cell-cushion {
     overflow-x: hidden;
 }
 
-.image-profile {
+.button-profile {
+    cursor: pointer;
+}
+
+.button-profile .image-profile {
     width: 25px;
+    margin-top: -5px;
     margin-right: 10px;
     text-align: center;
-    cursor: pointer;
 }
 
 .image-profile-option {

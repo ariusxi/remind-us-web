@@ -14,6 +14,7 @@ export interface FieldProperty {
     required?: boolean;
     requiredTrue?: boolean;
     compare?: boolean;
+    date?: boolean;
     email?: boolean;
     minLength?: LengthProperty;
     maxLength?: LengthProperty;
@@ -70,6 +71,13 @@ export class Validator {
 
     requiredTrue({inputValue}): object {
         return inputValue === true ? null : { requiredTrue: true };
+    }
+
+    date({inputValue}): object {
+        const today = new Date();
+        const currentDate = new Date(inputValue);
+
+        return today > currentDate ? { date: true } : null;
     }
 
     email({inputValue}): object {
