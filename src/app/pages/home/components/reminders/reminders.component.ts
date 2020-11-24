@@ -39,7 +39,7 @@ export class RemindersComponent {
             const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             retVal = textString.replace(urlRegex, (url) => {
                 return `<a href="${url}" target="_blank" class="url-reminder">${url}</a>`;
-            })
+            }).replace(/\n/g, '<br/>');
         }
 
         return retVal;

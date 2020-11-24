@@ -25,6 +25,7 @@
         </div>
         <div
             class="col-md-4 pt-2 pb-4"
+            [hidden]="isLoading"
             *ngFor="let currentCategory of categoriesList.docs">
             <card
                 [borderBottomColor]="currentCategory.color">
