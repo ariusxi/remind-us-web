@@ -1,3 +1,4 @@
+import { format, addHours } from 'date-fns';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -34,6 +35,23 @@ export class RemindersComponent implements OnInit{
     async ngOnInit(): Promise<void> {
         await this.loadReminders();
         await this.loadRemindersOfTheWeek();
+    }
+
+    public detectUrL(textString: string): string {
+        let retVal = textString;
+        console.log(retVal);
+        if (retVal) {
+            const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            retVal = textString.replace(urlRegex, (url) => {
+                return `<a href="${url}" target="_blank">${url}</a>`;
+            })
+        }
+
+        return retVal;
+    }
+
+    public formatDateTime(dateString: string): string {
+        return format(addHours(new Date(dateString), 3), 'dd/MM/yyyy HH:ii:ss');
     }
 
     public async loadReminders(): Promise<void> {
@@ -81,7 +99,7 @@ export class RemindersComponent implements OnInit{
                 nameReminder: reminder.name,
                 scheduledReminder: reminder.scheduled,
                 descriptionReminder: reminder.description,
-                categoryReminder: reminder.category._id,
+                categoryReminder: reminder.category ? reminder.category._id : '',
             },
             panelClass: 'my-dialog',
         });

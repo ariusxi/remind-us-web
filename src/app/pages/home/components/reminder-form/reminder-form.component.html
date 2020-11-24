@@ -71,7 +71,7 @@
                 (onChangeValue)="onChangeValue($event, 'categoryReminder')">
             </input-field>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <input-field
                 [placeholderText]="'Data do seu lembrete'"
                 [inputName]="'scheduledReminder'"
@@ -81,6 +81,17 @@
                 [inputType]="'date'"
                 [isRequired]="true"
                 (onChangeValue)="onChangeValue($event, 'scheduledReminder')">
+            </input-field>
+        </div>
+        <div class="col-md-3">
+            <input-field
+                [placeholderText]="'Hora do seu lembrete'"
+                [inputName]="'hourReminder'"
+                [inputValue]="hourReminder"
+                [errorField]="hasError('hourReminder')"
+                [inputType]="'time'"
+                [isRequired]="true"
+                (onChangeValue)="onChangeValue($event, 'hourReminder')">
             </input-field>
         </div>
         <div class="col-md-12">

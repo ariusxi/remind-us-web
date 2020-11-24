@@ -33,6 +33,11 @@
                         [className]="'font-weight-bold'"
                         [textValue]="currentReminder.name">
                     </text>
+                    <text
+                        tag="p"
+                        [className]="'date-reminder'"
+                        [textValue]="formatDateTime(currentReminder.scheduled)">
+                    </text>
                     <span
                         class="category-reminder"
                         *ngIf="currentReminder.category"
@@ -42,7 +47,7 @@
                     <text
                         tag="p"
                         [className]="'pt-5'"
-                        [textValue]="currentReminder.description"
+                        [textValue]="detectUrL(currentReminder.description)"
                         *ngIf="currentReminder.description !== ''">
                     </text>
                 </mat-card-content>

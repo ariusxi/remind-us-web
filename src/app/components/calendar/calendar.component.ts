@@ -1,7 +1,9 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { Subject } from 'rxjs';
+
+import { Reminder } from 'src/app/models/Reminder';
 
 @Component({
     selector: 'calendar',
@@ -9,9 +11,14 @@ import { Subject } from 'rxjs';
     templateUrl: './calendar.component.html',
     styleUrls: ['./calendar.component.css'],
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
 
     @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+
+    @Output() editReminder: EventEmitter<string> = new EventEmitter();
+    @Output() removeReminder: EventEmitter<string> = new EventEmitter();
+
+    @Input() eventReminders: Reminder[];
 
     public CalendarView = CalendarView;
 
@@ -30,8 +37,7 @@ export class CalendarComponent {
         onClick: ({ event }: { event: CalendarEvent }): void => {
             this.handleEvent('Edited', event);
         },
-      },
-      {
+    }, {
         label: '<i class="fas fa-fw fa-trash-alt"></i>',
         a11yLabel: 'Delete',
         onClick: ({ event }: { event: CalendarEvent }): void => {
@@ -42,18 +48,7 @@ export class CalendarComponent {
 
     public refresh: Subject<any> = new Subject();
 
-    public events: CalendarEvent[] = [{
-        start: subDays(startOfDay(new Date()), 1),
-        end: addDays(new Date(), 1),
-        title: 'A 3 day event',
-        actions: this.actions,
-        allDay: true,
-        resizable: {
-            beforeStart: true,
-            afterEnd: true,
-        },
-        draggable: true,
-    }]
+    public events: CalendarEvent[] = [];
 
     public dayClicked({ date, events }: { date: Date, events: CalendarEvent[] }): void {
         if (isSameMonth(date, this.viewDate)) {
@@ -64,6 +59,17 @@ export class CalendarComponent {
             }
             this.viewDate = date;
         }
+    }
+
+    ngOnInit(): void {
+        this.events = this.eventReminders.map((currentReminder) => ({
+            ...currentReminder,
+            start: startOfDay(new Date(currentReminder.scheduled)),
+            end: endOfDay(new Date(currentReminder.scheduled)),
+            title: currentReminder.name,
+            actions: this.actions,
+        }));
+        console.log(this.events);
     }
 
     public eventTimesChanged({ event, newStart, newEnd } : CalendarEventTimesChangedEvent) : void {
@@ -82,7 +88,13 @@ export class CalendarComponent {
     }
 
     public handleEvent(action: string, event: CalendarEvent): void {
-        this.modalData = { event, action };
+        const actionMethodEvent = (methodType: string) => ({
+            'Clicked': this.editReminder,
+            'Edited': this.editReminder,
+            'Deleted': this.removeReminder,
+        })[methodType];
+
+        actionMethodEvent(action).emit(event);
     }
 
     public addEvent(): void {

@@ -14,6 +14,7 @@
         [disabled]="disabled"
         [value]="inputValue"
         (keyup)="onChangeInput()"
+        [mask]="maskText"
         ngDefaultControl
     />
 
@@ -31,6 +32,24 @@
         [disabled]="disabled"
         [value]="inputValue"
         (change)="onChangeInput()"
+        ngDefaultControl
+    />
+
+    <!-- date and hour -->
+    <input
+        matInput
+        *ngIf="isDateInput()"
+        [(ngModel)]="inputValue"
+        [type]="inputType"
+        [required]="isRequired"
+        [placeholder]="placeholderText"
+        [class]="className"
+        [id]="inputName"
+        [name]="inputName"
+        [disabled]="disabled"
+        [value]="inputValue"
+        (keyup)="onChangeInput()"
+        (ngModelChange)="onChangeInput()"
         ngDefaultControl
     />
 

@@ -8,6 +8,7 @@
     --color-red: #f44336;
     --color-white: #ffffff;
     --color-grey: #cccccc;
+    --color-grey-darkest: #666666;
     --color-black: #000000;
 
 }
@@ -18,6 +19,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @keyframes spinner {
     to { transform: rotate(360deg); }
 }
+
+.date-reminder {
+    color: var(--color-grey-darkest);
+}
+
 
 .spinner:before {
     content: '';
