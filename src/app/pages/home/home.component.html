@@ -28,16 +28,29 @@
     mat-align-tabs="center">
     <!-- Login -->
     <mat-tab label="Lembretes">
-        <reminders></reminders>
+        <reminders
+            [reminderList]="reminderList"
+            [reminderListOfWeek]="reminderListOfWeek"
+            [isLoading]="isLoadingReminder"
+            (loadContent)="loadContent()">
+        </reminders>
     </mat-tab>
 
     <!-- Schedule -->
     <mat-tab label="Agenda">
-        <schedule></schedule>
+        <schedule
+            [reminderList]="reminderList.docs"
+            [isLoading]="isLoadingReminder"
+            (loadContent)="loadContent()">
+        </schedule>
     </mat-tab>
 
     <!-- Categories -->
     <mat-tab label="Categorias">
-        <categories></categories>
+        <categories
+            [categoriesList]="categoriesList"
+            [isLoading]="isLoadingCategory"
+            (loadContent)="loadContent()">
+        </categories>
     </mat-tab>
 </mat-tab-group>

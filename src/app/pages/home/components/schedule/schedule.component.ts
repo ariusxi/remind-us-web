@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Reminder } from 'src/app/models/Reminder';
+import { Paginate } from 'src/app/services/abstract.service';
 
 import { ReminderService } from 'src/app/services/reminder.service';
 import { ReminderFormComponent } from '../reminder-form/reminder-form.component';
@@ -12,32 +13,18 @@ import { ReminderRemoveComponent } from '../reminder-remove/reminder-remove.comp
     templateUrl: './schedule.component.html',
     styleUrls: ['./schedule.component.css']
 })
-export class ScheduleComponent implements OnInit{
+export class ScheduleComponent {
 
-    public isLoadingCalendar: boolean = true;
+    @Output() loadContent: EventEmitter<string> = new EventEmitter();
 
-    public reminderList: Reminder[] = [];
+    @Input() isLoading: boolean = true;
+    @Input() reminderList: Reminder[];
 
     constructor(
         public reminderService: ReminderService,
         public dialog: MatDialog,
-    ) {}
-
-    async ngOnInit(): Promise<void> {
-        await this.getAllReminders();
-    }
-
-    async getAllReminders(): Promise<void> {
-        this.isLoadingCalendar = true;
-
-        this.reminderService.getAll()
-            .then((response) => {
-                if (response.success) {
-                    // Caso tenha algum lembrete do usuário, ele deverá adicionar ao array
-                    this.reminderList = response.data.docs;
-                }
-                this.isLoadingCalendar = false;
-            }).catch((error) => console.error(error));
+    ) {
+        console.log(this);
     }
 
     editReminder(props: Reminder): void {
@@ -54,7 +41,7 @@ export class ScheduleComponent implements OnInit{
         });
 
         editDialog.afterClosed().subscribe(async () => {
-            await this.getAllReminders();
+            this.loadContent.emit();
         });
     }
 
@@ -67,7 +54,7 @@ export class ScheduleComponent implements OnInit{
         })
 
         removeDialog.afterClosed().subscribe(async () => {
-            await this.getAllReminders();
+            this.loadContent.emit();
         });
     }
 

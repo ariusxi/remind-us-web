@@ -24,6 +24,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: var(--color-grey-darkest);
 }
 
+.url-reminder {
+    justify-content: space-between;
+    display: flex;
+}
 
 .spinner:before {
     content: '';
