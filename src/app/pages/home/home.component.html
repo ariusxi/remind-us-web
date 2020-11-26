@@ -2,12 +2,16 @@
     [color]="'primary'"
     [navbarText]="'Remind Us'">
     <span class="navbar-spacer"></span>
-    <input-button
-        [buttonType]="'icon-button'"
-        [buttonIcon]="'account_circle'"
+    <span
+        class="pr-4 button-profile"
         *ngIf="userProfilePhoto === ''"
         (click)="showProfile()">
-    </input-button>
+        <input-button
+            [buttonType]="'icon-button'"
+            [buttonIcon]="'account_circle'">
+        </input-button>
+        {{getFirstName()}}
+    </span>
     <span
         class="pr-4 button-profile"
         *ngIf="userProfilePhoto !== ''"
