@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
 
         profileDialog.afterClosed().subscribe(() => {
             this.userProfile = Storage.get('user');
-            this.userProfilePhoto = this.userProfile.photo !== '' ? `/assets/images/user-icons/${this.userProfile.photo}.png` : ``;
+            this.userProfilePhoto = this.userProfile.photo && this.userProfile.photo !== '' ? `/assets/images/user-icons/${this.userProfile.photo}.png` : ``;
         })
     }
 
