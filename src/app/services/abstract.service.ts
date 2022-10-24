@@ -30,7 +30,7 @@ export interface Paginate<T> {
 })
 export class AbstractService<T> {
 
-    public url: string = 'https://api-remind-us.herokuapp.com/api/v1';
+    public url: string = 'https://remind-us-api.vercel.app/api/v1';
     public numberOfTries: number = 2;
 
     constructor(
